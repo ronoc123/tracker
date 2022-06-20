@@ -24,7 +24,9 @@ CREATE TABLE ticket (
     severity VARCHAR(50) NOT NULL,
     createdAt VARCHAR(100) NOT NULL,
     status VARCHAR(50) NOT NULL,
-    project_id INT NOT NULL
+    createdBy INT NOT NULL,
+    project_id INT NOT NULL,
+    FOREIGN KEY (createdBy) REFERENCES user_account (user_id),
     FOREIGN KEY (project_id) REFERENCES project (id)
 );
 
@@ -33,7 +35,10 @@ CREATE TABLE comment (
     id BIGSERIAL PRIMARY KEY,
     description VARCHAR(200) NOT NULL,
     ticket_id INT NOT NULL,
-    FOREIGN KEY (ticket_id) REFERENCES ticket (id)
+    user_id INT NOT NULL,
+    createdAt VARCHAR(100) NOT NULL,
+    FOREIGN KEY (ticket_id) REFERENCES ticket (id),
+    FOREIGN KEY (user_id) REFERENCES user_account (user_id)
 );
 
 CREATE TABLE project_interactions (
@@ -43,11 +48,6 @@ CREATE TABLE project_interactions (
     FOREIGN KEY (projectID) REFERENCES project (id),
     PRIMARY KEY (userID, projectID)
 );
-
-SELECT user_name FROM user_account 
-JOIN project_interactions ON user_account.user_id = project_interactions.userID
-JOIN project ON project.id = project_interactions.projectID 
-WHERE project.id = 1;
 
 
 

@@ -16,7 +16,6 @@ const addUserToProject = async (req, res) => {
 
 const userOnProject = async (req, res) => {
   const id = req.params.id;
-  console.log(id);
 
   const users = await db.query(
     "SELECT user_name FROM user_account JOIN project_interactions ON user_account.user_id = project_interactions.userID JOIN project ON project.id = project_interactions.projectID WHERE project.id = $1",

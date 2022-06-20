@@ -57,10 +57,15 @@ const deleteProject = async (req, res) => {
     id,
   ]);
 
+  // Check if the user was the one who created the project
+
   if (testId.rows[0].createdby != user_id) {
     throw new UnauthenticatedError("You did not create this project!");
   }
 
+  // DELETE FROM COMPOSITE TABLE
+  await db.query("DELETE FROM project_interactions WHERE projectid = $1", [id]);
+  // DELETE PROJECT
   await db.query("DELETE FROM project WHERE id = $1", [id]);
 
   res.status(StatusCodes.OK).send("Project Deleted!");

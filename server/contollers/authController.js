@@ -64,6 +64,8 @@ const login = async (req, res) => {
 
   const token = jwtGenerator(user.rows[0].user_id);
 
+  //    res.status(StatusCodes.OK).json({ user: user.rows[0], token });
+
   res.status(StatusCodes.OK).json({ user: user.rows, token });
 };
 

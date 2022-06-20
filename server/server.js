@@ -12,6 +12,8 @@ import authenticateUser from "./middleware/authorize.js";
 import authRouter from "./routes/authRoutes.js";
 import projectRouter from "./routes/projectRoutes.js";
 import projectUsersRouter from "./routes/projectUsers.js";
+import ticketRouter from "./routes/ticketRoutes.js";
+import commentRouter from "./routes/commentRoutes.js";
 
 const app = express();
 
@@ -25,6 +27,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/project", authenticateUser, projectRouter);
 app.use("/api/v1/projectusers", authenticateUser, projectUsersRouter);
+app.use("/api/v1/ticket", authenticateUser, ticketRouter);
+app.use("/api/v1/comment", authenticateUser, commentRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
