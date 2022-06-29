@@ -11,10 +11,10 @@ const links = [
     icon: <FaHome />,
   },
   {
-    text: "Roles",
-    id: 1,
-    path: "/role",
-    icon: <FaUserAlt />,
+    text: "Projects",
+    id: 4,
+    path: "/project",
+    icon: <BiStoreAlt />,
   },
   {
     text: "Tickets",
@@ -23,16 +23,10 @@ const links = [
     icon: <ImTicket />,
   },
   {
-    text: "Profile",
-    id: 3,
-    path: "/profile",
-    icon: <CgProfile />,
-  },
-  {
-    text: "Projects",
-    id: 4,
-    path: "/project",
-    icon: <BiStoreAlt />,
+    text: "Roles",
+    id: 1,
+    path: "/role",
+    icon: <FaUserAlt />,
   },
 ];
 

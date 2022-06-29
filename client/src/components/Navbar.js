@@ -5,10 +5,10 @@ import NavLinks from "../components/NavLinks.js";
 import { useAppContext } from "../context/appContext.js";
 import { FaUserCircle, FaBars } from "react-icons/fa";
 import { BsFillBellFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logoutUser } = useAppContext();
-  console.log(user[0].user_name);
 
   return (
     <Wrapper>
@@ -25,8 +25,12 @@ const Navbar = () => {
       {/* USER INFO */}
       <div className="user-info">
         <div className="item item-1">
-          <FaUserCircle className="icon-1" />
-          <h2>{user[0]?.user_name || "User"}</h2>
+          <Link to="/profile">
+            <FaUserCircle className="icon-1" />
+          </Link>
+          <Link to="/profile" className="profile-link">
+            {user[0]?.user_name || "User"}
+          </Link>
         </div>
         <h2 className="item item-2">
           <BsFillBellFill />

@@ -5,12 +5,13 @@ import UnauthenticatedError from "../errors/unauthenticated.js";
 
 const createProject = async (req, res) => {
   const { title, description } = req.body;
-  const { user_id } = req.user.user;
+  const { id: user_id } = req.user.user;
 
   const newProject = await db.query(
-    "INSERT INTO project(title, description, createdBy) VALUES($1, $2, $3) RETURNING *",
+    "INSERT INTO project(title, description, createdby) VALUES($1, $2, $3) RETURNING *",
     [title, description, user_id]
   );
+
   res.status(StatusCodes.CREATED).json({ project: newProject.rows });
 };
 const getAllProjects = async (req, res) => {

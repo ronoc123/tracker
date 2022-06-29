@@ -7,6 +7,9 @@ import Home from "./Home";
 import Error from "./Error";
 import ProtectedRoute from "./ProtectedRoute";
 import SharedLayout from "./SharedLayout";
+import AddProject from "./AddProject";
+import SingleProjectPage from "./SingleProjectPage";
+import AddTicket from "./AddTicket";
 
 export {
   ManageProject,
@@ -18,4 +21,7 @@ export {
   Error,
   ProtectedRoute,
   SharedLayout,
+  AddProject,
+  SingleProjectPage,
+  AddTicket,
 };

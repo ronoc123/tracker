@@ -69,4 +69,21 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ user: user.rows, token });
 };
 
-export { register, login };
+const updateUser = async (req, res) => {
+  const { user_name, email } = req.body;
+  const user_id = req.user.user.id;
+
+  if (!user_name || !email) {
+    throw new BadRequestError("Please provide all values!");
+  }
+
+  const user = await db.query(
+    "UPDATE user_account SET user_name = $1, email = $2 WHERE user_id = $3 RETURNING *",
+    [user_name, email, user_id]
+  );
+  const token = jwtGenerator(user.rows[0].user_id);
+
+  res.status(StatusCodes.OK).json({ user: user.rows, token });
+};
+
+export { register, login, updateUser };

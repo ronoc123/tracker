@@ -9,7 +9,10 @@ import {
   Home,
   Error,
   ProtectedRoute,
+  AddProject,
   SharedLayout,
+  SingleProjectPage,
+  AddTicket,
 } from "./pages/index";
 
 const App = () => {
@@ -27,10 +30,13 @@ const App = () => {
             }
           >
             <Route index element={<Home />} />
-            <Route path="project" element={<ManageProject />} />
             <Route path="role" element={<ManageRole />} />
             <Route path="ticket" element={<MyTickets />} />
             <Route path="profile" element={<UserProfile />} />
+            <Route path="addproject" element={<AddProject />} />
+            <Route path="addticket" element={<AddTicket />} />
+            <Route path="project" element={<ManageProject />} />
+            <Route path="project/:id" element={<SingleProjectPage />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>

@@ -1,8 +1,8 @@
 :root {
   /* dark shades of primary color*/
-  --clr-primary-1: #33b121;
+  --clr-primary-1: #9fe2bf;
   --clr-primary-2: #65b876;
-  --clr-primary-3: #d3ffe9;
+  --clr-primary-3: #367658;
   --clr-primary-4: hsl(42, 63%, 48%);
   /* primary/main color */
   --clr-background-1: #f0eff4;
@@ -13,9 +13,13 @@
   --spacing: 0.25rem;
   --radius: 0.5rem;
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   --max-width: 1170px;
+  --bodyFont: Monospace;
 }
+
+/* #33b121 */
+/* #d3ffe9 */
 /*
 =============== 
 Global Styles
@@ -30,7 +34,7 @@ Global Styles
   box-sizing: border-box;
 }
 body {
-  font-family: var(--ff-secondary);
+  font-family: var(--bodyFont);
   background: var(--clr-white);
   color: var(--clr-grey-1);
   line-height: 1.5;
@@ -48,8 +52,8 @@ a {
 }
 
 .btn {
-  background: #65b876;
-  color: white;
+  background: var(--clr-primary-1);
+  color: black;
   border: none;
   border-radius: 0.75rem;
   padding: 0.5rem;
