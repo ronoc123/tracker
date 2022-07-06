@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 const Wrapper = styled.nav`
-  height: 6rem;
+  height: 7rem;
   display: grid;
   grid-template-columns: 1.2fr 2fr 1fr;
   background: var(--clr-primary-3);
   padding-left: 3rem;
-  box-shadow: var(--dark-shadow);
+  margin-bottom: 1rem;
+  border-top: 1px solid #dfe6ed;
+  border-bottom: 1px solid #dfe6ed;
   /* border: 2px solid red; */
-
   .center {
     display: flex;
     align-items: center;
@@ -58,7 +59,7 @@ const Wrapper = styled.nav`
     }
   }
   .text {
-    color: white;
+    color: #545d63;
   }
 
   .user-info {
@@ -81,9 +82,12 @@ const Wrapper = styled.nav`
   .item-2 {
     display: grid;
     position: relative;
+    color: #545d63;
   }
   .profile-link {
-    color: white;
+    color: #545d63;
+    font-size: 1.2rem;
+    align-self: start;
   }
   .item-1:hover {
     transform: scale(1.05);
@@ -96,7 +100,7 @@ const Wrapper = styled.nav`
     right: -0.3rem;
     font-size: 0.8rem;
     color: black;
-    color: white;
+    color: #545d63;
   }
 
   .item {
@@ -108,10 +112,15 @@ const Wrapper = styled.nav`
   }
 
   .logout-btn {
-    width: 6rem;
+    width: 5.5rem;
     cursor: pointer;
     transition: var(--transition);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    background: #3f784c;
+    color: white;
+    font-weight: 600;
+    padding-bottom: 0.7rem;
+    margin-bottom: 0.5rem;
   }
 
   .logout-btn:hover {

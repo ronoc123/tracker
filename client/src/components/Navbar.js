@@ -32,10 +32,6 @@ const Navbar = () => {
             {user[0]?.user_name || "User"}
           </Link>
         </div>
-        <h2 className="item item-2">
-          <BsFillBellFill />
-          <span className="notification">2</span>
-        </h2>
         <h2 className="item">
           <button type="button" className="btn logout-btn" onClick={logoutUser}>
             Logout

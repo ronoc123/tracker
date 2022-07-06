@@ -34,8 +34,8 @@ const App = () => {
             <Route path="ticket" element={<MyTickets />} />
             <Route path="profile" element={<UserProfile />} />
             <Route path="addproject" element={<AddProject />} />
-            <Route path="addticket" element={<AddTicket />} />
             <Route path="project" element={<ManageProject />} />
+            <Route path="addticket/:id" element={<AddTicket />} />
             <Route path="project/:id" element={<SingleProjectPage />} />
           </Route>
           <Route path="*" element={<Error />} />

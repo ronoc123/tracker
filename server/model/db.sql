@@ -1,7 +1,7 @@
 CREATE TABLE user_account (
     user_id BIGSERIAL PRIMARY KEY,
     user_name VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     user_password VARCHAR(200) NOT NULL,
     user_role VARCHAR(50) DEFAULT 'user'
 );
@@ -10,9 +10,9 @@ CREATE TABLE user_account (
 CREATE TABLE project (
     id BIGSERIAL PRIMARY KEY,
     title VARCHAR(50) NOT NULL UNIQUE,
-    description VARCHAR(200) NOT NULL,
-    createdBy INT NOT NULL,
-    FOREIGN KEY (createdBy) REFERENCES user_account (user_id)
+    description VARCHAR(50) NOT NULL,
+    createdby INT NOT NULL,
+    FOREIGN KEY (createdby) REFERENCES user_account (user_id)
 );
 
 

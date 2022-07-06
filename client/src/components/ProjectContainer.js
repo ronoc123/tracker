@@ -7,6 +7,7 @@ const ProjectContainer = () => {
 
   useEffect(() => {
     fetchProjects();
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="project-container">
@@ -18,6 +19,7 @@ const ProjectContainer = () => {
       </div>
       {projects.map((project) => {
         const { id } = project;
+
         return <SingleProject key={id} {...project} />;
       })}
     </div>

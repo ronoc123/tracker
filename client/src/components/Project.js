@@ -22,7 +22,7 @@ const Project = () => {
             return <SingleDev key={index} value={dev} />;
           })}
         </div>
-        <Link to="/addticket" className="btn add-dev">
+        <Link to={`/addticket`} className="btn add-dev">
           Add developer
         </Link>
       </div>

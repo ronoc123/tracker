@@ -26,7 +26,7 @@ const SingleProjectPage = () => {
     <Wrapper className="full-page">
       <Project />
       <div className="title-1">
-        <Link to="/addticket" className="btn ticket-btn">
+        <Link to={`/addticket/${id}`} className="btn ticket-btn">
           Add Ticket
         </Link>
         <h1 className="title-text">Tickets on {singleProject[0]?.title}</h1>

@@ -17,6 +17,11 @@ const createTicket = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ ticket: ticket.rows });
 };
 
+const getAllTickets = async (req, res) => {
+  const allTickets = await db.query("SELECT * FROM ticket");
+  res.status(StatusCodes.OK).json({ Tickets: allTickets.rows });
+};
+
 const getAllUserTicket = async (req, res) => {
   const user_id = req.user.user.id;
 
@@ -76,4 +81,5 @@ export {
   editTicket,
   deleteTicket,
   getAllTicketOnProject,
+  getAllTickets,
 };

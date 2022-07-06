@@ -15,7 +15,10 @@ const createProject = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ project: newProject.rows });
 };
 const getAllProjects = async (req, res) => {
-  const projects = await db.query("SELECT * FROM project");
+  const projects = await db.query(
+    "SELECT title, description, user_name, id FROM project JOIN user_account ON project.createdby = user_account.user_id"
+  );
+
   res
     .status(StatusCodes.OK)
     .json({ projects: projects.rows, totalProject: projects.rows.length });
@@ -67,6 +70,7 @@ const deleteProject = async (req, res) => {
   // DELETE FROM COMPOSITE TABLE
   await db.query("DELETE FROM project_interactions WHERE projectid = $1", [id]);
   // DELETE PROJECT
+  await db.query("DELETE FROM ticket WHERE project_id = $1", [id]);
   await db.query("DELETE FROM project WHERE id = $1", [id]);
 
   res.status(StatusCodes.OK).send("Project Deleted!");

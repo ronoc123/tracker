@@ -11,8 +11,8 @@ import {
   LOGOUT_USER,
   GET_PROJECT_BEGIN,
   GET_PROJECT_SUCCESS,
-  GET_PROJECT_ERROR,
-  GET_SINGLE_PROJECT_ERROR,
+  // GET_PROJECT_ERROR,
+  // GET_SINGLE_PROJECT_ERROR,
   GET_SINGLE_PROJECT_BEGIN,
   GET_SINGLE_PROJECT_SUCCESS,
   CREATE_PROJECT_BEGIN,
@@ -22,16 +22,28 @@ import {
   CLEAR_VALUES,
   GET_PROJECT_TICKET_BEGIN,
   GET_PROJECT_TICKET_SUCCESS,
-  GET_PROJECT_TICKET_ERROR,
+  // GET_PROJECT_TICKET_ERROR,
   GET_MY_TICKET_BEGIN,
   GET_MY_TICKET_SUCCESS,
-  GET_MY_TICKET_ERROR,
+  // GET_MY_TICKET_ERROR,
   GET_USER_PROJECT_BEGIN,
   GET_USER_PROJECT_SUCCESS,
-  GET_USER_PROJECT_ERROR,
+  // GET_USER_PROJECT_ERROR,
   EDIT_USER_INFO_BEGIN,
   EDIT_USER_INFO_SUCCESS,
-  EDIT_USER_INFO_ERROR,
+  // EDIT_USER_INFO_ERROR,
+  CREATE_TICKET_BEGIN,
+  CREATE_TICKET_SUCCESS,
+  CREATE_TICKET_ERROR,
+  DELETE_PROJECT_BEGIN,
+  DELETE_PROJECT_SUCCESS,
+  DELETE_PROJECT_ERROR,
+  EDIT_FILTERS,
+  FILTERED_TICKETS,
+  CLEAR_FILTERS,
+  GET_ALL_TICKETS_BEGIN,
+  GET_ALL_TICKETS_SUCCESS,
+  GET_ALL_TICKETS_ERROR,
 } from "../action.js";
 
 const token = localStorage.getItem("token");
@@ -39,6 +51,7 @@ const user = localStorage.getItem("user");
 
 const initialState = {
   isLoading: false,
+  isEditing: false,
   alertText: "",
   alertType: "",
   user: user ? JSON.parse(user) : null,
@@ -49,6 +62,7 @@ const initialState = {
   project_title: "",
   project_description: "",
   showAlert: false,
+  tickets: [],
   myTickets: [],
   myTicketLoading: false,
   myTicketError: false,
@@ -61,6 +75,24 @@ const initialState = {
   devOnProjectLoading: false,
   devOnProjectError: false,
   devOnProject: [],
+  ticket_title: "",
+  ticket_description: "",
+  ticket_type: "",
+  ticket_type_options: ["critical", "high", "medium", "low"],
+  ticket_severity: "",
+  ticket_severity_options: ["critical", "high", "medium", "low"],
+  ticket_status: "",
+  ticket_status_options: ["open", "closed", "status"],
+  deleteProjectError: false,
+  filtered_tickets: [],
+  filter_ticket_type_options: ["all", "critical", "high", "medium", "low"],
+  filter_ticket_severity_options: ["all", "critical", "high", "medium", "low"],
+  filter_ticket_status_options: ["all", "open", "closed", "status"],
+  filter_text: "",
+  filter_status: "all",
+  filter_severity: "all",
+  filter_type: "all",
+  searchForm: false,
 };
 
 const AppContext = React.createContext();
@@ -112,7 +144,7 @@ const AppProvider = ({ children }) => {
         user_name: currentUser.name,
         email: currentUser.email,
         user_password: currentUser.password,
-        role: "user",
+        user_role: "user",
       });
       const { user, token } = response.data;
 
@@ -164,6 +196,49 @@ const AppProvider = ({ children }) => {
         type: CREATE_PROJECT_ERROR,
         payload: error.response.data.msg,
       });
+    }
+  };
+
+  const createTicket = async (id) => {
+    dispatch({ type: CREATE_TICKET_BEGIN });
+    let url = `/ticket/${id}`;
+    try {
+      const {
+        ticket_title,
+        ticket_status,
+        ticket_description,
+        ticket_severity,
+        ticket_type,
+      } = state;
+      await authFetch.post(url, {
+        title: ticket_title,
+        description: ticket_description,
+        type: ticket_type,
+        severity: ticket_severity,
+        status: ticket_status,
+      });
+      dispatch({ type: CREATE_TICKET_SUCCESS });
+      dispatch({ type: CLEAR_VALUES });
+      clearAlert();
+    } catch (error) {
+      dispatch({
+        type: CREATE_TICKET_ERROR,
+        payload: error.response.data.msg,
+      });
+    }
+  };
+
+  const deleteProject = async (id) => {
+    dispatch({ type: DELETE_PROJECT_BEGIN });
+    let url = `/project/${id}`;
+    try {
+      await authFetch.delete(url);
+      fetchProjects();
+      clearAlert();
+    } catch (error) {
+      dispatch({ type: DELETE_PROJECT_ERROR });
+      clearAlert();
+      // logoutUser()
     }
   };
 
@@ -221,6 +296,28 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const addFilter = () => {
+    const { myTickets } = state;
+    dispatch({
+      type: EDIT_FILTERS,
+      payload: myTickets,
+    });
+    dispatch({ type: FILTERED_TICKETS });
+  };
+
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
+
+  const fetchTickets = async () => {
+    dispatch({ type: GET_ALL_TICKETS_BEGIN });
+    let url = "/ticket/alltickets";
+    try {
+      const { data } = await authFetch(url);
+      dispatch({ type: GET_ALL_TICKETS_SUCCESS, payload: data });
+    } catch (error) {}
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -237,6 +334,11 @@ const AppProvider = ({ children }) => {
         fetchUsersOnProject,
         getMyTickets,
         editUserInfo,
+        createTicket,
+        deleteProject,
+        addFilter,
+        clearFilters,
+        fetchTickets,
       }}
     >
       {children}

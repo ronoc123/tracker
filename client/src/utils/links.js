@@ -22,12 +22,6 @@ const links = [
     path: "/ticket",
     icon: <ImTicket />,
   },
-  {
-    text: "Roles",
-    id: 1,
-    path: "/role",
-    icon: <FaUserAlt />,
-  },
 ];
 
 export default links;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 0.5fr 6fr;
+  grid-template-rows: 1fr auto;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -14,38 +14,46 @@ const Wrapper = styled.div`
   .title {
     justify-self: center;
     font-size: 3rem;
-    border-bottom: 2px solid black;
     width: 35vw;
+    font-weight: 500;
   }
 
   .btn-container {
-    justify-self: left;
+    position: absolute;
+    right: 5.8rem;
+    bottom: 4.5rem;
   }
 
   .create-btn {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: var(--transition);
+    background: #c2dfe3;
+    padding-bottom: 0.8rem;
+    font-weight: 580;
   }
   .create-btn:hover {
-    background: var(--clr-primary-3);
+    background: black;
     color: white;
     cursor: pointer;
     transform: scale(1.02);
   }
 
   .project-container {
+    background: white;
     height: 68vh;
     display: grid;
     grid-template-columns: 1fr;
     overflow: scroll;
-    grid-auto-rows: 5rem;
+    grid-auto-rows: 4rem;
     text-align: start;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.5);
     border-top: 4px solid black;
   }
 
   .project:nth-child(even) {
     background: #f0eff4;
+  }
+  .project:nth-child(odd) {
   }
 
   .project {
@@ -62,9 +70,33 @@ const Wrapper = styled.div`
   .project-links {
     font-size: 2rem;
     text-transform: capitalize;
-    color: var(--clr-primary-3);
+    color: black;
     margin-left: -1rem;
     padding-left: 0.6rem;
+  }
+
+  .links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .edit-btn {
+  }
+
+  .delete-btn {
+    background: var(--clr-primary-1);
+    padding-top: 0.3rem;
+    align-self: start;
+    font-size: 1rem;
+    border: none;
+    width: 4rem;
+    background: none;
+    justify-self: start;
+    text-align: left;
+    color: black;
+    border: none;
+    cursor: pointer;
+    margin-top: 0.2rem;
+    color: red;
   }
 
   @media screen and (max-width: 1100px) {

@@ -27,6 +27,17 @@ import {
   EDIT_USER_INFO_BEGIN,
   EDIT_USER_INFO_SUCCESS,
   EDIT_USER_INFO_ERROR,
+  CREATE_TICKET_BEGIN,
+  CREATE_TICKET_SUCCESS,
+  CREATE_TICKET_ERROR,
+  DELETE_PROJECT_BEGIN,
+  DELETE_PROJECT_ERROR,
+  EDIT_FILTERS,
+  FILTERED_TICKETS,
+  CLEAR_FILTERS,
+  GET_ALL_TICKETS_BEGIN,
+  GET_ALL_TICKETS_SUCCESS,
+  GET_ALL_TICKETS_ERROR,
 } from "../action.js";
 import { initialState } from "./appContext";
 
@@ -212,6 +223,117 @@ const reducer = (state, action) => {
       user: action.payload.user,
       showAlert: true,
       alertText: "User Profile Updated!",
+    };
+  }
+
+  if (action.type === CREATE_TICKET_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === CREATE_TICKET_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertText: "New Ticket Created!",
+    };
+  }
+  if (action.type === CREATE_TICKET_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alert: action.payload.msg,
+    };
+  }
+
+  if (action.type === DELETE_PROJECT_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === DELETE_PROJECT_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      deleteProjectError: true,
+      showAlert: true,
+      alertText: "You Did Not Create This Project!",
+    };
+  }
+
+  if (action.type === EDIT_FILTERS) {
+    return {
+      ...state,
+      filtered_tickets: [...action.payload],
+      searchForm: true,
+    };
+  }
+
+  if (action.type === FILTERED_TICKETS) {
+    const { filtered_tickets } = state;
+
+    const { filter_text, filter_status, filter_severity, filter_type } = state;
+
+    let tempTickets = [...filtered_tickets];
+
+    if (filter_text) {
+      tempTickets = tempTickets.filter((ticket) => {
+        return ticket.title.toLowerCase().startsWith(filter_text);
+      });
+    }
+
+    if (filter_status !== "all") {
+      tempTickets = tempTickets.filter((ticket) => {
+        return ticket.status.startsWith(filter_status);
+      });
+    }
+
+    if (filter_severity !== "all") {
+      tempTickets = tempTickets.filter((ticket) => {
+        return ticket.severity.startsWith(filter_severity);
+      });
+    }
+
+    if (filter_type !== "all") {
+      tempTickets = tempTickets.filter((ticket) => {
+        return ticket.type.startsWith(filter_type);
+      });
+    }
+
+    return {
+      ...state,
+      filtered_tickets: tempTickets,
+    };
+  }
+
+  if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      filter_text: "",
+      filter_status: "all",
+      filter_severity: "all",
+      filter_type: "all",
+      searchForm: false,
+    };
+  }
+
+  if (action.type === GET_ALL_TICKETS_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === GET_ALL_TICKETS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      tickets: action.payload.Tickets,
     };
   }
 

@@ -7,8 +7,10 @@ import {
   editTicket,
   deleteTicket,
   getAllTicketOnProject,
+  getAllTickets,
 } from "../contollers/ticket.js";
 
+router.route("/alltickets").get(getAllTickets);
 router.route("/").get(getAllUserTicket);
 router
   .route("/:id")
