@@ -30,7 +30,7 @@ const TicketContainer = () => {
         <div className="ticket-type big-screen">type</div>
         <div className="ticket-severity">Severity</div>
         <div className="ticket-status">status</div>
-        <div className="ticket-dev">devs assigned</div>
+        <div className="ticket-dev">Links</div>
       </div>
       {myTickets.map((ticket) => {
         const { id } = ticket;

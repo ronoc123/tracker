@@ -11,7 +11,7 @@ const Wrapper = styled.div`
     height: 60%;
     min-width: 400px;
     grid-template-rows: 1fr 6fr;
-    background: var(--clr-primary-1);
+    background: white;
     border-radius: var(--radius);
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   }
@@ -43,10 +43,11 @@ const Wrapper = styled.div`
   }
   .submit-btn {
     margin-top: 1rem;
-    background: var(--clr-primary-3);
+    background: var(--clr-primary-1);
     color: white;
     font-size: 1.2rem;
     transition: var(--transition);
+    padding-bottom: 0.7rem;
   }
 
   .submit-btn:hover {

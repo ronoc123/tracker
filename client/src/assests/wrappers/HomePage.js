@@ -122,7 +122,7 @@ const Wrapper = styled.div`
 
   .project-title {
     border-bottom: 2px solid black;
-    background: #ffe5d1;
+    background: #abcfd1;
     text-align: center;
   }
   .project-description {
@@ -134,6 +134,7 @@ const Wrapper = styled.div`
   .project-creator {
     justify-self: end;
     align-self: flex-end;
+    font-size: 1.2rem;
     padding-right: 1rem;
   }
   .span-title {

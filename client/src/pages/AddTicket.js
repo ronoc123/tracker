@@ -89,10 +89,10 @@ const AddTicket = () => {
             handleChange={handleTicketInput}
             list={ticket_type_options}
           />
+          <button type="submit" className="btn create-btn">
+            Submit
+          </button>
         </div>
-        <button type="submit" className="btn create-btn">
-          Submit
-        </button>
       </form>
     </Wrapper>
   );

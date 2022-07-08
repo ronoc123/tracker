@@ -54,6 +54,7 @@ const Wrapper = styled.div`
     background: #f0eff4;
   }
   .project:nth-child(odd) {
+    background: white;
   }
 
   .project {
@@ -75,10 +76,10 @@ const Wrapper = styled.div`
     padding-left: 0.6rem;
   }
 
-  .links {
+  /* .links {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-  }
+  } */
   .edit-btn {
   }
 
@@ -97,6 +98,25 @@ const Wrapper = styled.div`
     cursor: pointer;
     margin-top: 0.2rem;
     color: red;
+  }
+  .trash-icon {
+    color: #871109;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+    cursor: pointer;
+    align-self: start;
+    margin-top: 0.3rem;
+    transition: var(--transition);
+  }
+  .trash-icon:hover {
+    transform: scale(1.05);
+    color: red;
+  }
+  .ticket-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    margin-right: 3rem;
   }
 
   @media screen and (max-width: 1100px) {

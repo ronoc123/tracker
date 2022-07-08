@@ -66,6 +66,8 @@ const Wrapper = styled.div`
 
   .form-row {
     display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.5fr;
     text-align: left;
     margin-left: 2rem;
   }
@@ -136,6 +138,23 @@ const Wrapper = styled.div`
     margin-left: -1rem;
     border-bottom: 1px solid black;
     padding-left: 0.7rem;
+  }
+  .ticket-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-right: 12rem;
+  }
+
+  .trash-icon {
+    color: #871109;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .trash-icon:hover {
+    transform: scale(1.05);
+    color: red;
   }
 `;
 

@@ -35,7 +35,7 @@ const SearchContainer = () => {
         <FormRow
           type="name"
           name="filter_text"
-          labelText="search"
+          labelText="Search"
           value={filter_text}
           handleChange={handleTicketInput}
         />

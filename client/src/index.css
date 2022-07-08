@@ -2,7 +2,9 @@
   /* dark shades of primary color*/
   /* --clr-primary-1: #9fe2bf; */
   --clr-primary-2: #65b876;
-  --clr-primary-1: #3f784c;
+  /* --clr-primary-1: #3f784c; */
+  --clr-primary-1: #5b8a8c;
+  /* --clr-primary-1: #37a8b0; */
   /* --clr-primary-3: #9fe2bf; */
   --clr-primary-3: white;
   --clr-primary-4: hsl(42, 63%, 48%);

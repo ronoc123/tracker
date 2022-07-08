@@ -13,6 +13,9 @@ import {
   SharedLayout,
   SingleProjectPage,
   AddTicket,
+  AddDevToProject,
+  AddDevToTicket,
+  SingleTicketPage,
 } from "./pages/index";
 
 const App = () => {
@@ -37,6 +40,9 @@ const App = () => {
             <Route path="project" element={<ManageProject />} />
             <Route path="addticket/:id" element={<AddTicket />} />
             <Route path="project/:id" element={<SingleProjectPage />} />
+            <Route path="projectdev/:id" element={<AddDevToProject />} />
+            <Route path="ticketdev/:id" element={<AddDevToTicket />} />
+            <Route path="singleticket/:id" element={<SingleTicketPage />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>

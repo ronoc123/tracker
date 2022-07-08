@@ -6,10 +6,10 @@ const Wrapper = styled.section`
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background: #fafffb;
+  background: var(--clr-primary-5);
   .form-container {
     /* border: 2px solid red; */
-    border-top: 0.5rem solid #65b876;
+    border-top: 0.5rem solid var(--clr-primary-1);
     display: grid;
     width: 40vw;
     height: 55vh;
@@ -76,7 +76,7 @@ const Wrapper = styled.section`
     padding-left: 1.5rem;
     font-size: 2.5rem;
     font-weight: bold;
-    color: #33b121;
+    color: var(--clr-primary-1);
   }
 
   .center {
@@ -88,8 +88,9 @@ const Wrapper = styled.section`
   .login-btn {
     height: 3%;
     width: 60%;
+    color: white;
     text-transform: uppercase;
-    font-weight: 600;
+    font-size: 1.2rem;
     /* align-self: center; */
     transition: var(--transition);
     margin: 1rem 0;

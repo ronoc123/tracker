@@ -38,6 +38,11 @@ import {
   GET_ALL_TICKETS_BEGIN,
   GET_ALL_TICKETS_SUCCESS,
   GET_ALL_TICKETS_ERROR,
+  GET_USER_TICKET_BEGIN,
+  GET_USER_TICKET_SUCCESS,
+  CLEAR_TICKET_VALUES,
+  GET_SINGLE_TICKET_BEGIN,
+  GET_SINGLE_TICKET_SUCCESS,
 } from "../action.js";
 import { initialState } from "./appContext";
 
@@ -135,6 +140,17 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === CLEAR_TICKET_VALUES) {
+    return {
+      ...state,
+      ticket_title: "",
+      ticket_description: "",
+      ticket_type: "",
+      ticket_status: "",
+      ticket_severity: "",
+    };
+  }
+
   if (action.type === GET_PROJECT_TICKET_BEGIN) {
     return {
       ...state,
@@ -165,6 +181,21 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === GET_SINGLE_TICKET_BEGIN) {
+    return {
+      ...state,
+      singleTicketLoading: true,
+    };
+  }
+
+  if (action.type === GET_SINGLE_TICKET_SUCCESS) {
+    return {
+      ...state,
+      singleTicketLoading: false,
+      singleTicket: action.payload,
+    };
+  }
+
   if (action.type === GET_USER_PROJECT_BEGIN) {
     return {
       ...state,
@@ -184,6 +215,21 @@ const reducer = (state, action) => {
     return {
       ...state,
       devOnProjectError: true,
+    };
+  }
+
+  if (action.type === GET_USER_TICKET_BEGIN) {
+    return {
+      ...state,
+      devOnTicketLoading: true,
+    };
+  }
+
+  if (action.type === GET_USER_TICKET_SUCCESS) {
+    return {
+      ...state,
+      devOnTicketLoading: false,
+      devOnTicket: action.payload,
     };
   }
 

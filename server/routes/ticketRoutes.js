@@ -8,10 +8,12 @@ import {
   deleteTicket,
   getAllTicketOnProject,
   getAllTickets,
+  getSingleTicket,
 } from "../contollers/ticket.js";
 
 router.route("/alltickets").get(getAllTickets);
 router.route("/").get(getAllUserTicket);
+router.route("/singleticket/:id").get(getSingleTicket);
 router
   .route("/:id")
   .patch(editTicket)

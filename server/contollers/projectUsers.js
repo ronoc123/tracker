@@ -2,7 +2,8 @@ import db from "../db/index.js";
 import { StatusCodes } from "http-status-codes";
 
 const addUserToProject = async (req, res) => {
-  const user_id = req.user.user.id;
+  console.log(req.body.id);
+  const user_id = req.body.id;
 
   const project_id = req.params.id;
 

@@ -28,14 +28,15 @@ const Wrapper = styled.div`
   .ticket-btn {
     justify-self: start;
     align-self: center;
-    background: var(--clr-primary-3);
+    background: #d6ffc9;
     transition: var(--transition);
-    color: white;
+    color: #377523;
   }
   .ticket-btn:hover {
     font-size: 1.3rem;
-    color: black;
-    background: var(--clr-primary-1);
+    color: white;
+    background: #377523;
+    border: none;
   }
 
   .ticket-container {
@@ -103,6 +104,7 @@ const Wrapper = styled.div`
     justify-self: end;
     align-self: center;
     background: var(--clr-primary-3);
+    border: 1px solid grey;
     margin-right: 0.5rem;
     font-size: 0.75rem;
 
@@ -111,7 +113,22 @@ const Wrapper = styled.div`
 
   .add-dev:hover {
     font-size: 0.8rem;
-    color: white;
+  }
+  .trash-icon {
+    color: #871109;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .trash-icon:hover {
+    transform: scale(1.05);
+    color: red;
+  }
+  .ticket-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-right: 12rem;
   }
 `;
 

@@ -75,6 +75,16 @@ const getAllTicketOnProject = async (req, res) => {
   res.status(StatusCodes.OK).json({ tickets: projectTickets.rows });
 };
 
+const getAllDevsOnTicket = async (req, res) => {};
+
+const getSingleTicket = async (req, res) => {
+  const id = req.params.id;
+
+  const ticket = await db.query("SELECT * FROM ticket WHERE id = $1", [id]);
+
+  res.status(StatusCodes.OK).json({ ticket: ticket.rows });
+};
+
 export {
   createTicket,
   getAllUserTicket,
@@ -82,4 +92,5 @@ export {
   deleteTicket,
   getAllTicketOnProject,
   getAllTickets,
+  getSingleTicket,
 };

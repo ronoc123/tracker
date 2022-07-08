@@ -49,13 +49,14 @@ const Wrapper = styled.nav`
   }
 
   .link:hover {
-    background: var(--clr-primary-1);
+    /* background: var(--clr-primary-1); */
+    background: #87888a;
     .icon {
       color: var(--clr-primary-3);
     }
     .text {
       /* color: var(--clr-primary-3); */
-      color: black;
+      color: white;
     }
   }
   .text {
@@ -115,11 +116,11 @@ const Wrapper = styled.nav`
     width: 5.5rem;
     cursor: pointer;
     transition: var(--transition);
-    font-size: 1.1rem;
-    background: #3f784c;
+    font-size: 1.2rem;
+    background: var(--clr-primary-1);
     color: white;
-    font-weight: 600;
-    padding-bottom: 0.7rem;
+
+    padding-bottom: 0.8rem;
     margin-bottom: 0.5rem;
   }
 

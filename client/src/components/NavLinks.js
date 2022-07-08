@@ -6,11 +6,7 @@ import { useAppContext } from "../context/appContext.js";
 const NavLinks = () => {
   const { user } = useAppContext();
 
-  if (
-    user[0].user_role === "admin" ||
-    user[0].user_role === "user" ||
-    user[0].user_role === null
-  ) {
+  if (user[0].user_role === "admin") {
     return (
       <div className="nav-link">
         {links.map((link) => {
@@ -26,7 +22,7 @@ const NavLinks = () => {
           <span className="icon">
             <FaUserAlt />
           </span>
-          <h1 className="text">Roles</h1>
+          <h1 className="text">Administration</h1>
         </NavLink>
       </div>
     );

@@ -10,6 +10,9 @@ import SharedLayout from "./SharedLayout";
 import AddProject from "./AddProject";
 import SingleProjectPage from "./SingleProjectPage";
 import AddTicket from "./AddTicket";
+import AddDevToProject from "./AddDevToProject";
+import AddDevToTicket from "./AddDevToTicket";
+import SingleTicketPage from "./SingleTicketPage";
 
 export {
   ManageProject,
@@ -24,4 +27,7 @@ export {
   AddProject,
   SingleProjectPage,
   AddTicket,
+  AddDevToProject,
+  AddDevToTicket,
+  SingleTicketPage,
 };

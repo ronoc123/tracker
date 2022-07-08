@@ -33,12 +33,12 @@ const SingleProjectPage = () => {
       </div>
       <div className="ticket-container">
         <div className="ticket">
-          <div className="ticket-title">title</div>
+          <div className="ticket-title">Title</div>
           <div className="ticket-description">description</div>
           <div className="ticket-type">type</div>
           <div className="ticket-severity">severity</div>
           <div className="ticket-status">status</div>
-          <div className="ticket-devs">Devs assigned</div>
+          <div className="ticket-devs">Links</div>
         </div>
         {projectTicket.map((project) => {
           const { id } = project;

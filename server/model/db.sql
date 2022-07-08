@@ -49,5 +49,16 @@ CREATE TABLE project_interactions (
     PRIMARY KEY (userID, projectID)
 );
 
+CREATE TABLE ticket_interactions (
+    userID INT NOT NULL,
+    ticketID INT NOT NULL,
+    FOREIGN KEY (userID) REFERENCES user_account (user_id),
+    FOREIGN KEY (ticketID) REFERENCES ticket (id),
+    PRIMARY KEY (userID, ticketID)
+);
+
+
+-- SELECT * FROM ticket
+-- JOIN ticket_interactions ON ticket_interactions.ticketid = ticket.id WHERE ticket_interactions.userid = 1;
 
 

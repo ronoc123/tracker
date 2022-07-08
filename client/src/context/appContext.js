@@ -28,6 +28,8 @@ import {
   // GET_MY_TICKET_ERROR,
   GET_USER_PROJECT_BEGIN,
   GET_USER_PROJECT_SUCCESS,
+  GET_USER_TICKET_BEGIN,
+  GET_USER_TICKET_SUCCESS,
   // GET_USER_PROJECT_ERROR,
   EDIT_USER_INFO_BEGIN,
   EDIT_USER_INFO_SUCCESS,
@@ -44,6 +46,9 @@ import {
   GET_ALL_TICKETS_BEGIN,
   GET_ALL_TICKETS_SUCCESS,
   GET_ALL_TICKETS_ERROR,
+  CLEAR_TICKET_VALUES,
+  GET_SINGLE_TICKET_BEGIN,
+  GET_SINGLE_TICKET_SUCCESS,
 } from "../action.js";
 
 const token = localStorage.getItem("token");
@@ -75,14 +80,24 @@ const initialState = {
   devOnProjectLoading: false,
   devOnProjectError: false,
   devOnProject: [],
+  devOnTicketLoading: false,
+  devOnProjectError: false,
+  devOnTicket: [],
   ticket_title: "",
   ticket_description: "",
-  ticket_type: "",
-  ticket_type_options: ["critical", "high", "medium", "low"],
-  ticket_severity: "",
+  ticket_type: "functional error",
+  ticket_type_options: [
+    "functional error",
+    "performance defect",
+    "usability defect",
+    "security defect",
+    "compatibility defect",
+    "other",
+  ],
+  ticket_severity: "critical",
   ticket_severity_options: ["critical", "high", "medium", "low"],
-  ticket_status: "",
-  ticket_status_options: ["open", "closed", "status"],
+  ticket_status: "open",
+  ticket_status_options: ["open", "closed", "pending"],
   deleteProjectError: false,
   filtered_tickets: [],
   filter_ticket_type_options: ["all", "critical", "high", "medium", "low"],
@@ -93,6 +108,8 @@ const initialState = {
   filter_severity: "all",
   filter_type: "all",
   searchForm: false,
+  singleTicket: [],
+  singleTicketLoading: false,
 };
 
 const AppContext = React.createContext();
@@ -218,7 +235,7 @@ const AppProvider = ({ children }) => {
         status: ticket_status,
       });
       dispatch({ type: CREATE_TICKET_SUCCESS });
-      dispatch({ type: CLEAR_VALUES });
+      dispatch({ type: CLEAR_TICKET_VALUES });
       clearAlert();
     } catch (error) {
       dispatch({
@@ -272,6 +289,15 @@ const AppProvider = ({ children }) => {
     } catch (error) {}
   };
 
+  const fetchUsersOnTicket = async (ticket_id) => {
+    dispatch({ type: GET_USER_TICKET_BEGIN });
+    let url = `/ticketusers/${ticket_id}`;
+    try {
+      const { data } = await authFetch(url);
+      dispatch({ type: GET_USER_TICKET_SUCCESS, payload: data.developers });
+    } catch (error) {}
+  };
+
   const getMyTickets = async () => {
     dispatch({ type: GET_MY_TICKET_BEGIN });
     let url = `/ticket`;
@@ -318,6 +344,15 @@ const AppProvider = ({ children }) => {
     } catch (error) {}
   };
 
+  const fetchSingleTicket = async (ticket_id) => {
+    dispatch({ type: GET_SINGLE_TICKET_BEGIN });
+    let url = `/ticket/singleticket/${ticket_id}`;
+    try {
+      const { data } = await authFetch(url);
+      dispatch({ type: GET_SINGLE_TICKET_SUCCESS, payload: data.ticket });
+    } catch (error) {}
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -339,6 +374,8 @@ const AppProvider = ({ children }) => {
         addFilter,
         clearFilters,
         fetchTickets,
+        fetchUsersOnTicket,
+        fetchSingleTicket,
       }}
     >
       {children}

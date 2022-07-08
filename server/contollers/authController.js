@@ -32,8 +32,12 @@ const register = async (req, res) => {
     "INSERT INTO user_account(user_name, email, user_password, user_role) VALUES($1, $2, $3, $4) RETURNING *",
     [user_name, email, password, user_role]
   );
-
-  const token = jwtGenerator(newUser.rows[0].user_id);
+  const token = jwtGenerator(
+    newUser.rows[0].user_id,
+    newUser.rows[0].user_name,
+    newUser.rows[0].email,
+    newUser.rows[0].user_role
+  );
 
   res.status(StatusCodes.CREATED).json({ user: newUser.rows, token });
 };
@@ -62,7 +66,12 @@ const login = async (req, res) => {
     throw new UnauthenticatedError("Incorrect Password");
   }
 
-  const token = jwtGenerator(user.rows[0].user_id);
+  const token = jwtGenerator(
+    user.rows[0].user_id,
+    user.rows[0].user_name,
+    user.rows[0].email,
+    user.rows[0].user_role
+  );
 
   //    res.status(StatusCodes.OK).json({ user: user.rows[0], token });
 
