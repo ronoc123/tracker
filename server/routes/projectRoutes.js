@@ -7,9 +7,11 @@ import {
   editProject,
   deleteProject,
   createProject,
+  getDevsOnProject,
 } from "../contollers/projectController.js";
 
 router.route("/").get(getAllProjects).post(createProject);
+router.route("/devs/:id").get(getDevsOnProject);
 router
   .route("/:id")
   .patch(editProject)

@@ -61,13 +61,23 @@ const deleteProject = async (req, res) => {
     id,
   ]);
 
-  // Check if the user was the one who created the project
-
-  if (testId.rows[0].createdby != user_id) {
+  const ticketDelete = await db.query(
+    "SELECT id FROM ticket WHERE project_id = $1",
+    [id]
+  );
+  console.log(ticketDelete.rows);
+  if (
+    req.user.user.user_role !== "admin" &&
+    testId.rows[0].createdby !== user_id
+  ) {
     throw new UnauthenticatedError("You did not create this project!");
   }
-
   // DELETE FROM COMPOSITE TABLE
+
+  await db.query("DELETE FROM ticket_interactions WHERE projectid = $1", [id]);
+
+  await db.query("DELETE FROM comment WHERE projectID = $1", [id]);
+
   await db.query("DELETE FROM project_interactions WHERE projectid = $1", [id]);
   // DELETE PROJECT
   await db.query("DELETE FROM ticket WHERE project_id = $1", [id]);
@@ -76,10 +86,27 @@ const deleteProject = async (req, res) => {
   res.status(StatusCodes.OK).send("Project Deleted!");
 };
 
+const getDevsOnProject = async (req, res) => {
+  const { id } = req.params;
+
+  const project = await db.query(
+    "SELECT project_id FROM ticket WHERE id = $1",
+    [id]
+  );
+  const project_id = project.rows[0].project_id;
+  const users = await db.query(
+    "SELECT user_name, user_id FROM user_account JOIN project_interactions ON user_account.user_id = project_interactions.userID JOIN project ON project.id = project_interactions.projectID WHERE project.id = $1",
+    [project_id]
+  );
+
+  res.status(StatusCodes.OK).json({ developers: users.rows });
+};
+
 export {
   getAllProjects,
   getSingleProject,
   editProject,
   deleteProject,
   createProject,
+  getDevsOnProject,
 };

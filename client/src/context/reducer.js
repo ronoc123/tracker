@@ -43,6 +43,25 @@ import {
   CLEAR_TICKET_VALUES,
   GET_SINGLE_TICKET_BEGIN,
   GET_SINGLE_TICKET_SUCCESS,
+  GET_COMMENT_TICKET_BEGIN,
+  GET_COMMENT_TICKET_SUCCESS,
+  ADD_COMMENT_BEGIN,
+  ADD_COMMENT_SUCCESS,
+  GET_PROJECT_DEV_BEGIN,
+  GET_PROJECT_DEV_SUCCESS,
+  ADD_DEV_TICKET_BEGIN,
+  ADD_DEV_TICKET_SUCCESS,
+  DELETE_TICKET_BEGIN,
+  DELETE_TICKET_SUCCESS,
+  DELETE_TICKET_ERROR,
+  ADD_DEV_PROJECT_BEGIN,
+  ADD_DEV_PROJECT_SUCCESS,
+  GET_ALL_USERS_BEGIN,
+  GET_ALL_USERS_SUCCESS,
+  EDIT_USER_FILTERS,
+  FILTERED_USER,
+  GET_DEVS_ON_SINGLE_PROJECT_SUCCESS,
+  GET_DEVS_ON_SINGLE_PROJECT_BEGIN,
 } from "../action.js";
 import { initialState } from "./appContext";
 
@@ -356,6 +375,31 @@ const reducer = (state, action) => {
       filtered_tickets: tempTickets,
     };
   }
+  if (action.type === EDIT_USER_FILTERS) {
+    return {
+      ...state,
+      filtered_project_dev_options: [...action.payload],
+      searchForm: true,
+    };
+  }
+
+  if (action.type === FILTERED_USER) {
+    const { filtered_project_dev_options } = state;
+    const { searchDev } = state;
+
+    let tempUsers = [...filtered_project_dev_options];
+
+    if (searchDev) {
+      tempUsers = tempUsers.filter((user) => {
+        return user.user_name.toLowerCase().startsWith(searchDev);
+      });
+    }
+
+    return {
+      ...state,
+      filtered_project_dev_options: tempUsers,
+    };
+  }
 
   if (action.type === CLEAR_FILTERS) {
     return {
@@ -380,6 +424,120 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       tickets: action.payload.Tickets,
+    };
+  }
+  if (action.type === GET_COMMENT_TICKET_BEGIN) {
+    return {
+      ...state,
+      commentTicketLoading: true,
+    };
+  }
+  if (action.type === GET_COMMENT_TICKET_SUCCESS) {
+    return {
+      ...state,
+      commentTicketLoading: false,
+      commentsOnTicket: action.payload,
+    };
+  }
+  if (action.type === ADD_COMMENT_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === ADD_COMMENT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+    };
+  }
+
+  if (action.type === GET_PROJECT_DEV_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === GET_PROJECT_DEV_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      ticketDevOptions: action.payload,
+    };
+  }
+
+  if (action.type === ADD_DEV_TICKET_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === ADD_DEV_TICKET_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+    };
+  }
+  if (action.type === DELETE_TICKET_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === DELETE_TICKET_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+    };
+  }
+
+  if (action.type === DELETE_TICKET_ERROR) {
+    return {
+      ...state,
+      alertText: "You did not create this ticket!",
+    };
+  }
+
+  if (action.type === GET_ALL_USERS_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === GET_ALL_USERS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      projectDevOptions: action.payload,
+    };
+  }
+  if (action.type === ADD_DEV_PROJECT_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === ADD_DEV_PROJECT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+    };
+  }
+
+  if (action.type === GET_DEVS_ON_SINGLE_PROJECT_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === GET_DEVS_ON_SINGLE_PROJECT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      devOnSingleProject: action.payload,
     };
   }
 

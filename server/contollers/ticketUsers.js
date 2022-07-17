@@ -6,9 +6,17 @@ const addUserToTicket = async (req, res) => {
 
   const ticket_id = req.params.id;
 
+  const projectInfo = await db.query(
+    "SELECT project_id FROM ticket WHERE id = $1",
+    [ticket_id]
+  );
+  const project_id = projectInfo.rows[0].project_id;
+
+  console.log(project_id);
+
   await db.query(
-    "INSERT INTO ticket_interactions(userID, ticketID) VALUES($1, $2)",
-    [user_id, ticket_id]
+    "INSERT INTO ticket_interactions(userID, ticketID, projectID) VALUES($1, $2, $3)",
+    [user_id, ticket_id, project_id]
   );
 
   res.status(StatusCodes.CREATED).send("User added to Ticket.");

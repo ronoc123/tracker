@@ -49,6 +49,25 @@ import {
   CLEAR_TICKET_VALUES,
   GET_SINGLE_TICKET_BEGIN,
   GET_SINGLE_TICKET_SUCCESS,
+  GET_COMMENT_TICKET_BEGIN,
+  GET_COMMENT_TICKET_SUCCESS,
+  ADD_COMMENT_BEGIN,
+  ADD_COMMENT_SUCCESS,
+  GET_PROJECT_DEV_BEGIN,
+  GET_PROJECT_DEV_SUCCESS,
+  ADD_DEV_TICKET_BEGIN,
+  ADD_DEV_TICKET_SUCCESS,
+  DELETE_TICKET_BEGIN,
+  DELETE_TICKET_SUCCESS,
+  DELETE_TICKET_ERROR,
+  ADD_DEV_PROJECT_BEGIN,
+  ADD_DEV_PROJECT_SUCCESS,
+  GET_ALL_USERS_BEGIN,
+  GET_ALL_USERS_SUCCESS,
+  EDIT_USER_FILTERS,
+  FILTERED_USER,
+  GET_DEVS_ON_SINGLE_PROJECT_BEGIN,
+  GET_DEVS_ON_SINGLE_PROJECT_SUCCESS,
 } from "../action.js";
 
 const token = localStorage.getItem("token");
@@ -110,6 +129,17 @@ const initialState = {
   searchForm: false,
   singleTicket: [],
   singleTicketLoading: false,
+  commentsOnTicket: [],
+  commentTicketLoading: false,
+  commentDescription: "",
+  ticketDevOptions: [],
+  addDevToTicket: "",
+  projectDevOptions: [],
+  filtered_project_dev_options: [],
+  searchDev: "",
+  addDevToProject: "",
+  devSearchForm: false,
+  devsOnSingleProject: [],
 };
 
 const AppContext = React.createContext();
@@ -255,7 +285,21 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       dispatch({ type: DELETE_PROJECT_ERROR });
       clearAlert();
-      // logoutUser()
+    }
+  };
+
+  const deleteTicket = async (id) => {
+    dispatch({ type: DELETE_TICKET_BEGIN });
+    let url = `/ticket/${id}`;
+
+    try {
+      await authFetch.delete(url);
+      dispatch({ type: DELETE_TICKET_SUCCESS });
+      getMyTickets();
+      clearAlert();
+    } catch (error) {
+      dispatch({ type: DELETE_TICKET_ERROR });
+      clearAlert();
     }
   };
 
@@ -353,6 +397,98 @@ const AppProvider = ({ children }) => {
     } catch (error) {}
   };
 
+  const getCommentsOnTicket = async (id) => {
+    dispatch({ type: GET_COMMENT_TICKET_BEGIN });
+    let url = `/comment/${id}`;
+    try {
+      const { data } = await authFetch(url);
+      dispatch({ type: GET_COMMENT_TICKET_SUCCESS, payload: data.comments });
+    } catch (error) {}
+  };
+
+  const addComment = async (id) => {
+    dispatch({ type: ADD_COMMENT_BEGIN });
+    let url = `/comment/${id}`;
+    const { commentDescription } = state;
+    console.log(commentDescription);
+    try {
+      await authFetch.post(url, {
+        description: commentDescription,
+      });
+      dispatch({ type: ADD_COMMENT_SUCCESS });
+    } catch (error) {}
+  };
+
+  const fetchDevWithTicket = async (id) => {
+    dispatch({ type: GET_PROJECT_DEV_BEGIN });
+    let url = `/project/devs/${id}`;
+
+    try {
+      const { data } = await authFetch(url);
+      dispatch({ type: GET_PROJECT_DEV_SUCCESS, payload: data.developers });
+    } catch (error) {}
+  };
+
+  const addToTicket = async (id, usersId) => {
+    dispatch({ type: ADD_DEV_TICKET_BEGIN });
+    let url = `ticketusers/${id}`;
+    try {
+      await authFetch.post(url, {
+        id: usersId,
+      });
+      dispatch({ type: ADD_DEV_TICKET_SUCCESS });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addToProject = async (id, usersId) => {
+    dispatch({ type: ADD_DEV_PROJECT_BEGIN });
+    let url = `projectusers/${id}`;
+    try {
+      await authFetch.post(url, {
+        id: usersId,
+      });
+      dispatch({ type: ADD_DEV_PROJECT_SUCCESS });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchUsers = async () => {
+    dispatch({ type: GET_ALL_USERS_BEGIN });
+    let url = `/projectusers`;
+    try {
+      const { data } = await authFetch(url);
+      dispatch({ type: GET_ALL_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addUserFilter = () => {
+    const { projectDevOptions } = state;
+    dispatch({
+      type: EDIT_USER_FILTERS,
+      payload: projectDevOptions,
+    });
+    dispatch({ type: FILTERED_USER });
+  };
+
+  const getDevsOnSingleProject = async (id) => {
+    dispatch({ type: GET_DEVS_ON_SINGLE_PROJECT_BEGIN });
+    let url = `/projectusers/${id}`;
+    try {
+      const { data } = await authFetch(url);
+      dispatch({
+        type: GET_DEVS_ON_SINGLE_PROJECT_SUCCESS,
+        payload: data.developers,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -376,6 +512,15 @@ const AppProvider = ({ children }) => {
         fetchTickets,
         fetchUsersOnTicket,
         fetchSingleTicket,
+        getCommentsOnTicket,
+        addComment,
+        fetchDevWithTicket,
+        addToTicket,
+        deleteTicket,
+        addToProject,
+        fetchUsers,
+        addUserFilter,
+        getDevsOnSingleProject,
       }}
     >
       {children}

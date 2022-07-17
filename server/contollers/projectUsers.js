@@ -2,7 +2,6 @@ import db from "../db/index.js";
 import { StatusCodes } from "http-status-codes";
 
 const addUserToProject = async (req, res) => {
-  console.log(req.body.id);
   const user_id = req.body.id;
 
   const project_id = req.params.id;
@@ -30,4 +29,10 @@ const userOnProject = async (req, res) => {
   res.status(StatusCodes.OK).json({ developers });
 };
 
-export { userOnProject, addUserToProject };
+const getAllUsers = async (req, res) => {
+  const users = await db.query("SELECT user_name, user_id FROM user_account");
+
+  res.status(StatusCodes.OK).json({ users: users.rows });
+};
+
+export { userOnProject, addUserToProject, getAllUsers };

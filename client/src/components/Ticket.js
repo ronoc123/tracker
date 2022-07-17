@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { BsTrash } from "react-icons/bs";
 
 const Ticket = ({ title, description, type, severity, status, id }) => {
+  const { deleteTicket } = useAppContext();
+
   return (
     <div className="ticket">
       <div>{title}</div>
@@ -15,7 +17,7 @@ const Ticket = ({ title, description, type, severity, status, id }) => {
       <div className="ticket-links">
         <Link to={`/singleticket/${id}`}>Info</Link>
         <Link to={`/addticket/${id}`}>Edit</Link>
-        <BsTrash className="trash-icon" />
+        <BsTrash className="trash-icon" onClick={() => deleteTicket(id)} />
       </div>
     </div>
   );
