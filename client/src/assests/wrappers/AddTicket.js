@@ -6,22 +6,32 @@ const Wrapper = styled.div`
   padding-top: 2rem;
 
   .form-container {
-    height: 25rem;
+    display: grid;
+    grid-template-rows: 5rem auto;
+    height: 50vh;
+    display: grid;
     background: white;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    width: 25vw;
     box-shadow: var(--dark-shadow);
     border-radius: var(--radius);
+    min-width: 20rem;
+    min-height: 25rem;
+    padding-bottom: 1rem;
   }
   .input-container {
     display: grid;
     align-items: center;
-    justify-content: left;
-    width: 20vw;
-    min-width: 25rem;
+    justify-content: center;
+    justify-self: center;
+    grid-template-columns: 1fr;
+    width: 100%;
   }
   .form-row {
     display: grid;
+    grid-template-columns: 1fr;
+    width: 70%;
+    justify-self: center;
+    min-width: 10rem;
   }
   .title {
     text-align: center;
@@ -32,7 +42,6 @@ const Wrapper = styled.div`
     text-transform: capitalize;
   }
   .form-input {
-    width: 25rem;
     height: 1.5rem;
     font-size: 1.1rem;
     padding-left: 0.2rem;

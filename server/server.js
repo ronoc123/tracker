@@ -15,6 +15,7 @@ import projectUsersRouter from "./routes/projectUsers.js";
 import ticketRouter from "./routes/ticketRoutes.js";
 import commentRouter from "./routes/commentRoutes.js";
 import userTicketRouter from "./routes/ticketUsers.js";
+import userInfoRouter from "./routes/userInfoRoutes.js";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/api/v1/projectusers", projectUsersRouter);
 app.use("/api/v1/ticket", authenticateUser, ticketRouter);
 app.use("/api/v1/comment", authenticateUser, commentRouter);
 app.use("/api/v1/ticketusers", userTicketRouter);
+app.use("/api/v1/userinfo", userInfoRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

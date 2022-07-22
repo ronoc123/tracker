@@ -2,19 +2,23 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: grid;
+  grid-template-columns: 1fr;
   justify-content: center;
 
   .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 80vw;
+    justify-self: center;
+    width: 80%;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    column-gap: 1rem;
   }
   .ticket-dev-container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 1fr;
+    grid-template-rows: 1fr 2fr;
+    row-gap: 1rem;
   }
   .ticket-container {
     background: white;
@@ -24,6 +28,7 @@ const Wrapper = styled.div`
     font-size: 1.2rem;
     font-weight: bold;
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr 1fr 1fr 1fr 1fr;
   }
@@ -32,20 +37,14 @@ const Wrapper = styled.div`
     font-weight: normal;
   }
   .dev-container {
-    margin-top: 1rem;
     background: white;
+    width: 100%;
     padding: 1rem;
     box-shadow: var(--dark-shadow);
     border-radius: var(--radius);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 3rem auto;
-  }
-
-  .dev-names {
-  }
-
-  .add-devs {
   }
 
   .form-row-devs {
@@ -80,10 +79,10 @@ const Wrapper = styled.div`
     grid-template-rows: 0.5fr 1fr 8fr;
     background: white;
     padding: 1rem;
-    margin-left: 1rem;
     box-shadow: var(--dark-shadow);
     border-radius: var(--radius);
     max-height: 48.5rem;
+    width: 100%;
   }
   .comment {
     display: grid;
@@ -126,7 +125,7 @@ const Wrapper = styled.div`
   .form-row {
     display: grid;
     grid-template-columns: 50px 11fr 2fr;
-    height: 50px;
+    height: 1rem;
     column-gap: 1rem;
   }
 
@@ -146,6 +145,89 @@ const Wrapper = styled.div`
     margin-bottom: 1rem;
   }
   .single-comment {
+  }
+
+  @media screen and (max-width: 1400px) {
+    .container {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      row-gap: 2rem;
+    }
+    .comment-container {
+      width: 100%;
+    }
+    .comment-btn {
+      height: 2rem;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    .container {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      row-gap: 2rem;
+      justify-self: center;
+    }
+    .comment-container {
+    }
+    .comment-btn {
+      height: 2rem;
+      font-size: 0.7rem;
+      padding: 0.5rem;
+    }
+    .form-select-devs {
+      height: 2rem;
+      width: 100%;
+    }
+    .devs-btn {
+      font-size: 0.7rem;
+    }
+    .form-row-devs {
+      grid-template-columns: 2fr 1fr;
+    }
+    .dev-info {
+      grid-template-columns: 1fr;
+    }
+    .info-container {
+      font-size: 0.8rem;
+    }
+    .text-ticket {
+      font-size: 0.7rem;
+    }
+  }
+  @media screen and (max-width: 380px) {
+    .container {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      row-gap: 2rem;
+      justify-self: left;
+      margin-left: 0.8rem;
+    }
+    .comment-container {
+    }
+    .comment-btn {
+      height: 2rem;
+      font-size: 0.7rem;
+      padding: 0.5rem;
+    }
+    .form-select-devs {
+      height: 2rem;
+      width: 100%;
+    }
+    .devs-btn {
+      font-size: 0.7rem;
+    }
+    .form-row-devs {
+      grid-template-columns: 2fr 1fr;
+    }
+    .dev-info {
+      grid-template-columns: 1fr;
+    }
+    .info-container {
+      font-size: 0.8rem;
+    }
+    .text-ticket {
+      font-size: 0.7rem;
+    }
   }
 `;
 

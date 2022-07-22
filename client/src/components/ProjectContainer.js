@@ -14,7 +14,7 @@ const ProjectContainer = () => {
       <div className="project">
         <div className="project-title">title</div>
         <div className="project-description big-screen">description</div>
-        <div className="project-creator big-screen">creator</div>
+        <div className="project-creator big-screen medium-screen">creator</div>
         <div className="project-links">links</div>
       </div>
       {projects.map((project) => {

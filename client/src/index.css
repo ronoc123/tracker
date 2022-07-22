@@ -47,6 +47,11 @@ body {
   font-size: 0.875rem;
   background: var(--clr-primary-5);
 }
+/* ::-webkit-scrollbar {
+  background: none;
+
+} */
+
 ul {
   list-style-type: none;
 }

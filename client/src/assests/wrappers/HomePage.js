@@ -3,15 +3,16 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.5fr 0.5fr 3fr;
+  grid-template-rows: 1fr 6rem auto;
   .project-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     /* text-align: center; */
     column-gap: 5rem;
     row-gap: 5rem;
-    margin-left: 15rem;
-    margin-right: 15rem;
+    /* margin-left: 15rem; */
+    /* margin-right: 15rem; */
+    justify-self: center;
     margin-bottom: 2rem;
     margin-top: 1rem;
   }
@@ -51,6 +52,8 @@ const Wrapper = styled.div`
     margin-bottom: 1rem;
     gap: 2rem;
     margin-top: 2rem;
+    justify-self: center;
+    width: 70vw;
   }
   .stat-title {
     justify-self: start;
@@ -140,6 +143,43 @@ const Wrapper = styled.div`
   .span-title {
     font-size: 1.6rem;
     border-bottom: 1px solid black;
+  }
+
+  @media screen and (max-width: 1400px) {
+    .project-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 2rem;
+    }
+    .stats-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 60vw;
+      font-size: 0.4rem;
+      grid-column-gap: 0rem;
+      justify-self: center;
+      margin-left: 0rem;
+      margin-right: 0rem;
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .project-container {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .stats-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 60vw;
+      font-size: 0.7rem;
+      grid-column-gap: 0rem;
+      justify-self: center;
+      margin-left: 0rem;
+      margin-right: 0rem;
+      min-width: 22rem;
+    }
   }
 `;
 

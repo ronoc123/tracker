@@ -26,18 +26,18 @@ const SingleProjectPage = () => {
     <Wrapper className="full-page">
       <Project />
       <div className="title-1">
-        <Link to={`/addticket/${id}`} className="btn ticket-btn">
+        <h1 className="title-text">Tickets on {singleProject[0]?.title}</h1>
+        <Link to={`/addticket/${id}`} className="ticket-btn">
           Add Ticket
         </Link>
-        <h1 className="title-text">Tickets on {singleProject[0]?.title}</h1>
       </div>
       <div className="ticket-container">
         <div className="ticket">
           <div className="ticket-title">Title</div>
-          <div className="ticket-description">description</div>
-          <div className="ticket-type">type</div>
-          <div className="ticket-severity">severity</div>
-          <div className="ticket-status">status</div>
+          <div className="ticket-description medium">description</div>
+          <div className="ticket-type medium">type</div>
+          <div className="ticket-severity small">severity</div>
+          <div className="ticket-status small">status</div>
           <div className="ticket-devs">Links</div>
         </div>
         {projectTicket.map((project) => {

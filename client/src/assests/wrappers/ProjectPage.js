@@ -3,33 +3,44 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 3rem auto;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  margin-left: 4rem;
-  margin-right: 4rem;
-  padding-bottom: 2rem;
+  row-gap: 2rem;
+  height: 80vh;
+  /* border: 2px solid red; */
 
   .title {
-    justify-self: center;
+    justify-self: start;
     font-size: 3rem;
     width: 35vw;
     font-weight: 500;
   }
-
-  .btn-container {
-    position: absolute;
-    right: 5.8rem;
-    bottom: 4.5rem;
+  .heading-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80vw;
+    justify-self: center;
+  }
+  .alert {
+    text-align: center;
+    font-size: 1.3rem;
   }
 
   .create-btn {
-    font-size: 1.2rem;
+    display: grid;
+    align-items: center;
+    padding-bottom: 0.2rem;
     transition: var(--transition);
     background: #c2dfe3;
-    padding-bottom: 0.8rem;
+    width: 50%;
+    height: 50%;
+    font-size: 1.2rem;
     font-weight: 580;
+    align-self: end;
+    justify-self: end;
+    text-align: center;
+    border-radius: var(--radius);
   }
   .create-btn:hover {
     background: black;
@@ -40,11 +51,14 @@ const Wrapper = styled.div`
 
   .project-container {
     background: white;
-    height: 68vh;
+    height: 70vh;
+    align-self: flex-start;
+    width: 80vw;
+    justify-self: center;
     display: grid;
-    grid-template-columns: 1fr;
     overflow: scroll;
     overflow-x: hidden;
+    grid-template-columns: 1fr;
     grid-auto-rows: 4rem;
     text-align: start;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.5);
@@ -60,7 +74,7 @@ const Wrapper = styled.div`
 
   .project {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
     padding-left: 1rem;
     font-size: 1.2rem;
     border-bottom: 1px solid lightgray;
@@ -73,40 +87,27 @@ const Wrapper = styled.div`
     font-size: 2rem;
     text-transform: capitalize;
     color: black;
-    margin-left: -1rem;
-    padding-left: 0.6rem;
   }
 
-  /* .links {
+  .links {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-  } */
-  .edit-btn {
+    justify-self: left;
+    column-gap: 1rem;
   }
-
-  .delete-btn {
+  /* .delete-btn {
     background: var(--clr-primary-1);
     padding-top: 0.3rem;
-    align-self: start;
-    font-size: 1rem;
-    border: none;
-    width: 4rem;
     background: none;
-    justify-self: start;
-    text-align: left;
-    color: black;
-    border: none;
     cursor: pointer;
     margin-top: 0.2rem;
     color: red;
-  }
+  } */
   .trash-icon {
     color: #871109;
-    margin-top: 0.5rem;
     opacity: 0.7;
     cursor: pointer;
-    align-self: start;
-    margin-top: 0.3rem;
+    padding-top: 0.2rem;
     transition: var(--transition);
   }
   .trash-icon:hover {
@@ -116,11 +117,33 @@ const Wrapper = styled.div`
   .ticket-links {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    justify-content: center;
-    margin-right: 3rem;
+    text-align: center;
   }
 
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1500px) {
+    .project {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      padding-left: 1rem;
+      font-size: 1.2rem;
+    }
+    .project-container {
+      height: 90vh;
+    }
+    .medium-screen {
+      display: none;
+    }
+    .title {
+      font-size: 1.5rem;
+    }
+    .create-btn {
+      font-size: 1rem;
+      width: 50%;
+      height: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
     .project {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -134,7 +157,12 @@ const Wrapper = styled.div`
       display: none;
     }
     .title {
-      font-size: 2rem;
+      font-size: 1.5rem;
+    }
+    .create-btn {
+      font-size: 1rem;
+      width: 80%;
+      height: 80%;
     }
   }
 `;

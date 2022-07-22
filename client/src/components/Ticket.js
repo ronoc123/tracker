@@ -9,11 +9,11 @@ const Ticket = ({ title, description, type, severity, status, id }) => {
 
   return (
     <div className="ticket">
-      <div>{title}</div>
-      <div>{description}</div>
-      <div>{type}</div>
-      <div>{severity}</div>
-      <div>{status}</div>
+      <div className="ticket-title-info">{title}</div>
+      <div className="ticket-description-info medium">{description}</div>
+      <div className="ticket-type-info medium">{type}</div>
+      <div className="ticket-severity-info small">{severity}</div>
+      <div className="ticket-status-info small">{status}</div>
       <div className="ticket-links">
         <Link to={`/singleticket/${id}`}>Info</Link>
         <Link to={`/addticket/${id}`}>Edit</Link>

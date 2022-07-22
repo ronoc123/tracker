@@ -62,6 +62,8 @@ import {
   FILTERED_USER,
   GET_DEVS_ON_SINGLE_PROJECT_SUCCESS,
   GET_DEVS_ON_SINGLE_PROJECT_BEGIN,
+  GET_SINGLE_USER_INFO_BEGIN,
+  GET_SINGLE_USER_INFO_SUCCESS,
 } from "../action.js";
 import { initialState } from "./appContext";
 
@@ -538,6 +540,20 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       devOnSingleProject: action.payload,
+    };
+  }
+
+  if (action.type === GET_SINGLE_USER_INFO_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === GET_SINGLE_USER_INFO_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      adminEdit: action.payload,
     };
   }
 

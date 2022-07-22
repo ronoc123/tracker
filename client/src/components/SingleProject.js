@@ -9,12 +9,12 @@ const SingleProject = ({ title, description, user_name, id }) => {
     <div className="project">
       <div>{title}</div>
       <div className="big-screen">{description}</div>
-      <div className="big screen">{user_name}</div>
+      <div className="big-screen medium-screen">{user_name}</div>
       <div className="links ticket-links">
         <Link to={`/project/${id}`} className="details-btn">
           Details
         </Link>
-        <Link to={`/project/${id}`} className="edit-btn">
+        <Link to={`/editproject/${id}`} className="edit-btn">
           Edit
         </Link>
         <div

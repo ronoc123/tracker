@@ -2,7 +2,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.2fr 1.8fr 5fr;
+  grid-template-rows: 3rem 10rem auto;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -137,19 +137,18 @@ const Wrapper = styled.div`
     font-size: 2rem;
     text-transform: capitalize;
     color: black;
-    margin-left: -1rem;
     border-bottom: 1px solid black;
-    padding-left: 0.7rem;
   }
   .ticket-links {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding-right: 12rem;
+    justify-self: left;
+    column-gap: 1rem;
   }
 
   .trash-icon {
     color: #871109;
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
     opacity: 0.7;
     cursor: pointer;
     transition: var(--transition);
@@ -157,6 +156,32 @@ const Wrapper = styled.div`
   .trash-icon:hover {
     transform: scale(1.05);
     color: red;
+  }
+  @media screen and (max-width: 1300px) {
+    grid-template-rows: 2rem 20rem auto;
+    .input-container {
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .medium {
+      display: none;
+    }
+    .ticket {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    grid-template-rows: 2rem 20rem auto;
+    .input-container {
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .small {
+      display: none;
+    }
+    .ticket {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 `;
 

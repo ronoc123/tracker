@@ -16,6 +16,7 @@ import {
   AddDevToProject,
   AddDevToTicket,
   SingleTicketPage,
+  EditProject,
 } from "./pages/index";
 
 const App = () => {
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="projectdev/:id" element={<AddDevToProject />} />
             <Route path="ticketdev/:id" element={<AddDevToTicket />} />
             <Route path="singleticket/:id" element={<SingleTicketPage />} />
+            <Route path="editproject/:id" element={<EditProject />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>

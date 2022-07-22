@@ -114,7 +114,7 @@ const SingleTicketPage = () => {
                     })}
                   </select>
                   <button className="devs-btn" type="submit">
-                    Add to Ticket
+                    Add
                   </button>
                 </form>
                 {/* TESTING END */}

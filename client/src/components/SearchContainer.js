@@ -64,7 +64,7 @@ const SearchContainer = () => {
           Search
         </button>
         <button className="clear-btn btn" onClick={() => clearFilters()}>
-          Clear Filter
+          Clear
         </button>
       </div>
     </form>

@@ -8,13 +8,13 @@ const ManageProject = () => {
   const { showAlert } = useAppContext();
   return (
     <Wrapper className="full-page">
-      <h1 className="title">Manage Projects</h1>
-      {showAlert && <Alert />}
-      <div className="btn-container">
-        <Link className="btn create-btn" to="/addproject">
+      <div className="heading-container">
+        <h1 className="title">Projects</h1>
+        <Link className="create-btn" to="/addproject">
           New Project
         </Link>
       </div>
+      {showAlert && <Alert />}
       <ProjectContainer />
     </Wrapper>
   );

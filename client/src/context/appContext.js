@@ -68,7 +68,10 @@ import {
   FILTERED_USER,
   GET_DEVS_ON_SINGLE_PROJECT_BEGIN,
   GET_DEVS_ON_SINGLE_PROJECT_SUCCESS,
+  GET_SINGLE_USER_INFO_BEGIN,
+  GET_SINGLE_USER_INFO_SUCCESS,
 } from "../action.js";
+import { Action } from "history";
 
 const token = localStorage.getItem("token");
 const user = localStorage.getItem("user");
@@ -140,6 +143,9 @@ const initialState = {
   addDevToProject: "",
   devSearchForm: false,
   devsOnSingleProject: [],
+  adminEdit: [],
+  editProjectTitle: "",
+  editProjectDescription: "",
 };
 
 const AppContext = React.createContext();
@@ -489,6 +495,20 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const fetchSingleUser = async (userId) => {
+    dispatch({ type: GET_SINGLE_USER_INFO_BEGIN });
+    try {
+      const { data } = await authFetch("/userinfo", {
+        params: {
+          id: userId,
+        },
+      });
+      dispatch({ type: GET_SINGLE_USER_INFO_SUCCESS, payload: data.user });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -521,6 +541,7 @@ const AppProvider = ({ children }) => {
         fetchUsers,
         addUserFilter,
         getDevsOnSingleProject,
+        fetchSingleUser,
       }}
     >
       {children}

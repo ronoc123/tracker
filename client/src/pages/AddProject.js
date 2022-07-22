@@ -52,10 +52,10 @@ const AddProject = () => {
               className="form-input description"
             />
           </div>
+          <button type="submit" className="btn create-btn">
+            Submit
+          </button>
         </div>
-        <button type="submit" className="btn create-btn">
-          Submit
-        </button>
       </form>
     </Wrapper>
   );
