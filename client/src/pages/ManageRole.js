@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import FormRow from "../components/FormRow";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import FormRowSelect from "../components/FormRowSelect";
+import Alert from "../components/Alert";
 
 const ManageRole = () => {
-  const [search, setSearch] = useState(false);
   const {
     // addToProject,
     fetchUsers,
-    handleChange,
+    // handleChange,
     searchDev,
     addUserFilter,
     filtered_project_dev_options,
@@ -20,7 +20,19 @@ const ManageRole = () => {
     // addDevToProject,
     // getDevsOnSingleProject,
     // devOnSingleProject,
+    updateUserInformation,
+    displayAlert,
   } = useAppContext();
+
+  const initial = {
+    username: adminEdit[0]?.user_name || "",
+    email: adminEdit[0]?.email || "",
+    user_role: adminEdit[0]?.user_role || "",
+    id: adminEdit[0]?.user_id || "",
+  };
+
+  const [search, setSearch] = useState(false);
+  const [values, setValues] = useState(initial);
 
   const devSubmit = (userId) => {
     fetchSingleUser(userId);
@@ -31,52 +43,73 @@ const ManageRole = () => {
     setSearch(true);
   };
 
-  const handleUserInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+  const editSubmit = (e) => {
+    e.preventDefault();
 
-    handleChange({ name, value });
+    const { username, user_role, email, id } = values;
+
+    console.log(username, user_role, email, id);
+
+    if (!username || !user_role || !email || !id) {
+      displayAlert();
+      return;
+    }
+
+    updateUserInformation(id, username, user_role, email);
   };
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   useEffect(() => {
     fetchUsers();
-  }, []);
+    setValues(initial);
+  }, [adminEdit[0]?.user_name, adminEdit[0]?.email, adminEdit[0]?.user_role]);
 
   return (
     <Wrapper className="full-page">
       <div className="container">
         <div className="user-search-container">
-          <div className="single-user-container">
-            <h2 className="user-title">User Information</h2>
+          <form className="single-user-container" onSubmit={editSubmit}>
+            <div className="heading">
+              <h2 className="user-title">User Information</h2>
+              <Alert />
+            </div>
             <FormRow
               type="text"
               labelText="Username"
-              name="admin_user_name"
-              value={adminEdit[0]?.user_name}
-              handleChange={handleUserInput}
+              name="username"
+              value={values?.username}
+              handleChange={handleChange}
             />
-            <FormRow type="text" name="Email" value={adminEdit[0]?.email} />
+            <FormRow
+              type="text"
+              labelText="Email"
+              name="email"
+              handleChange={handleChange}
+              value={values?.email}
+            />
             <FormRowSelect
-              name="admin_role"
-              value={adminEdit[0]?.user_role}
+              name="user_role"
+              value={values?.user_role}
               labelText="Role"
+              handleChange={handleChange}
               list={["user", "manager", "admin"]}
             />
-            <h3>User ID : {adminEdit[0]?.user_id}</h3>
+            <h3>User ID : {values?.id}</h3>
             <div className="btns">
               <button type="submit" className="edit-btn">
                 Save Changes
               </button>
-              <button type="submit" className="delete-btn">
-                Delete User
-              </button>
             </div>
-          </div>
+          </form>
           <form className="search-container" onSubmit={searchSubmit}>
             <FormRow
               type="text"
               name="searchDev"
               value={searchDev}
-              handleChange={handleUserInput}
+              handleChange={handleChange}
               labelText="Search"
             />
             <button className="search-btn" type="submit">

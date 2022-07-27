@@ -64,6 +64,15 @@ import {
   GET_DEVS_ON_SINGLE_PROJECT_BEGIN,
   GET_SINGLE_USER_INFO_BEGIN,
   GET_SINGLE_USER_INFO_SUCCESS,
+  EDIT_PROJECT_SUCCESS,
+  EDIT_PROJECT_BEGIN,
+  EDIT_PROJECT_ERROR,
+  EDIT_TICKET_BEGIN,
+  EDIT_TICKET_SUCCESS,
+  EDIT_TICKET_ERROR,
+  EDIT_USER_BEGIN,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_ERROR,
 } from "../action.js";
 import { initialState } from "./appContext";
 
@@ -166,9 +175,9 @@ const reducer = (state, action) => {
       ...state,
       ticket_title: "",
       ticket_description: "",
-      ticket_type: "",
-      ticket_status: "",
-      ticket_severity: "",
+      ticket_type: "functional error",
+      ticket_status: "open",
+      ticket_severity: "critical",
     };
   }
 
@@ -305,6 +314,7 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       showAlert: true,
+
       alertText: "New Ticket Created!",
     };
   }
@@ -554,6 +564,67 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       adminEdit: action.payload,
+    };
+  }
+
+  if (action.type === EDIT_PROJECT_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === EDIT_PROJECT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      singleProject: action.payload,
+      alertText: "Project Edit Successful",
+    };
+  }
+
+  if (action.type === EDIT_PROJECT_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      alertText: "You did not create this project!",
+    };
+  }
+  if (action.type === EDIT_TICKET_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === EDIT_TICKET_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      singleProject: action.payload,
+      alertText: "Project Edit Successful",
+    };
+  }
+
+  if (action.type === EDIT_TICKET_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      alertText: "You did not create this project!",
+    };
+  }
+
+  if (action.type === EDIT_USER_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === EDIT_USER_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      adminEdit: action.payload,
+      alertText: "User Updated",
     };
   }
 

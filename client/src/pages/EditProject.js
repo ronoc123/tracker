@@ -4,9 +4,11 @@ import Wrapper from "../assests/wrappers/EditProject";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import Alert from "../components/Alert";
 
 const EditProject = () => {
-  const { fetchSingleProject, singleProject, displayAlert } = useAppContext();
+  const { fetchSingleProject, singleProject, displayAlert, editProjectInfo } =
+    useAppContext();
 
   const initialState = {
     title: singleProject[0]?.title || "",
@@ -30,6 +32,8 @@ const EditProject = () => {
       displayAlert();
       return;
     }
+
+    editProjectInfo(title, description, id);
   };
 
   useEffect(() => {
@@ -39,8 +43,11 @@ const EditProject = () => {
 
   return (
     <Wrapper className="full-page">
-      <div className="edit-container">
-        <h2 className="title">Edit Project</h2>
+      <form className="edit-container" onSubmit={onSubmit}>
+        <div className="title">
+          <h2 className="title">Edit Project</h2>
+          <Alert />
+        </div>
         <div className="form-container">
           <FormRow
             type="text"
@@ -65,7 +72,7 @@ const EditProject = () => {
             Save Changes
           </button>
         </div>
-      </div>
+      </form>
     </Wrapper>
   );
 };

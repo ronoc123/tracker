@@ -70,8 +70,16 @@ import {
   GET_DEVS_ON_SINGLE_PROJECT_SUCCESS,
   GET_SINGLE_USER_INFO_BEGIN,
   GET_SINGLE_USER_INFO_SUCCESS,
+  EDIT_PROJECT_SUCCESS,
+  EDIT_PROJECT_BEGIN,
+  EDIT_PROJECT_ERROR,
+  EDIT_TICKET_BEGIN,
+  EDIT_TICKET_SUCCESS,
+  EDIT_TICKET_ERROR,
+  EDIT_USER_BEGIN,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_ERROR,
 } from "../action.js";
-import { Action } from "history";
 
 const token = localStorage.getItem("token");
 const user = localStorage.getItem("user");
@@ -122,7 +130,15 @@ const initialState = {
   ticket_status_options: ["open", "closed", "pending"],
   deleteProjectError: false,
   filtered_tickets: [],
-  filter_ticket_type_options: ["all", "critical", "high", "medium", "low"],
+  filter_ticket_type_options: [
+    "all",
+    "functional error",
+    "performance defect",
+    "usability defect",
+    "security defect",
+    "compatibility defect",
+    "other",
+  ],
   filter_ticket_severity_options: ["all", "critical", "high", "medium", "low"],
   filter_ticket_status_options: ["all", "open", "closed", "status"],
   filter_text: "",
@@ -297,11 +313,12 @@ const AppProvider = ({ children }) => {
   const deleteTicket = async (id) => {
     dispatch({ type: DELETE_TICKET_BEGIN });
     let url = `/ticket/${id}`;
+    const { singleProject } = state;
 
     try {
       await authFetch.delete(url);
       dispatch({ type: DELETE_TICKET_SUCCESS });
-      getMyTickets();
+      fetchTicketsOnProject(singleProject[0].id);
       clearAlert();
     } catch (error) {
       dispatch({ type: DELETE_TICKET_ERROR });
@@ -350,7 +367,7 @@ const AppProvider = ({ children }) => {
 
   const getMyTickets = async () => {
     dispatch({ type: GET_MY_TICKET_BEGIN });
-    let url = `/ticket`;
+    let url = `/ticketusers/userticket/${user[0].user_id}`;
     try {
       const { data } = await authFetch(url);
       dispatch({ type: GET_MY_TICKET_SUCCESS, payload: data.tickets });
@@ -370,6 +387,54 @@ const AppProvider = ({ children }) => {
       addUserToLocalStorage({ user: data.user, token: data.token });
     } catch (error) {}
     clearAlert();
+  };
+
+  const editProjectInfo = async (projectTitle, projectDescription, id) => {
+    dispatch({ type: EDIT_PROJECT_BEGIN });
+    let url = `/project/${id}`;
+    try {
+      const { data } = await authFetch.patch(url, {
+        title: projectTitle,
+        description: projectDescription,
+      });
+      console.log(data);
+
+      dispatch({ type: EDIT_PROJECT_SUCCESS, payload: data.project });
+      clearAlert();
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: EDIT_PROJECT_ERROR });
+      clearAlert();
+    }
+  };
+
+  const editTicketInfo = async (
+    ticketTitle,
+    ticketDescription,
+    ticketType,
+    ticketSeverity,
+    ticketStatus,
+    id
+  ) => {
+    dispatch({ type: EDIT_TICKET_BEGIN });
+    let url = `/ticket/${id}`;
+    try {
+      const { data } = await authFetch.patch(url, {
+        title: ticketTitle,
+        description: ticketDescription,
+        type: ticketType,
+        severity: ticketSeverity,
+        status: ticketStatus,
+      });
+      console.log(data);
+
+      dispatch({ type: EDIT_TICKET_SUCCESS, payload: data.ticket });
+      clearAlert();
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: EDIT_TICKET_ERROR });
+      clearAlert();
+    }
   };
 
   const addFilter = () => {
@@ -509,6 +574,24 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const updateUserInformation = async (id, username, user_role, email) => {
+    dispatch({ type: EDIT_USER_BEGIN });
+    console.log(id, username, user_role, email);
+    let url = `/auth/adminupdate`;
+    try {
+      const { data } = await authFetch.patch(url, {
+        user_name: username,
+        user_role: user_role,
+        email: email,
+        user_id: id,
+      });
+
+      dispatch({ type: EDIT_USER_SUCCESS, payload: data.user });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -542,6 +625,9 @@ const AppProvider = ({ children }) => {
         addUserFilter,
         getDevsOnSingleProject,
         fetchSingleUser,
+        editProjectInfo,
+        editTicketInfo,
+        updateUserInformation,
       }}
     >
       {children}

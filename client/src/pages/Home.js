@@ -32,7 +32,7 @@ const Home = () => {
         <div className="stat">
           <div className="stat-amount blue">
             {tickets.reduce((total, ticket) => {
-              if (ticket.severity === "low") {
+              if (ticket.severity === "critical") {
                 return total + 1;
               }
               return total;
@@ -46,7 +46,7 @@ const Home = () => {
         <div className="stat">
           <div className="stat-amount red">
             {tickets.reduce((total, ticket) => {
-              if (ticket.type === "high") {
+              if (ticket.type === "security defect") {
                 return total + 1;
               }
               return total;
@@ -55,7 +55,7 @@ const Home = () => {
           <div className="icon-container-red">
             <TiTicket className="stat-icon red" />
           </div>
-          <h1 className="stat-title">Critical Type</h1>
+          <h1 className="stat-title">Security Defects</h1>
         </div>
       </div>
       <div className="main-title">Projects</div>

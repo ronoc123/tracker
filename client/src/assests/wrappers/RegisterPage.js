@@ -53,8 +53,7 @@ const Wrapper = styled.section`
   }
 
   .form-input {
-    border: 1px solid #65b876;
-    background: #eafce8;
+    color: var(--clr-primary-1);
     border-radius: 0.5rem;
     height: 3.3vh;
     width: 15vw;
@@ -98,7 +97,6 @@ const Wrapper = styled.section`
 
   .login-btn:hover {
     cursor: pointer;
-    background: #18541a;
     transform: scale(1.02);
   }
 
@@ -106,7 +104,7 @@ const Wrapper = styled.section`
     background: transparent;
     border: transparent;
     text-transform: capitalize;
-    color: #65b876;
+    color: var(--clr-primary-1);
     font-size: 1rem;
     cursor: pointer;
   }

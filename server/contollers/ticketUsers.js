@@ -37,4 +37,15 @@ const userOnTicket = async (req, res) => {
   res.status(StatusCodes.OK).json({ developers });
 };
 
-export { userOnTicket, addUserToTicket };
+const getAllUserTicket = async (req, res) => {
+  const user_id = req.user.user.id;
+
+  const tickets = await db.query(
+    "SELECT * FROM ticket JOIN ticket_interactions ON ticket.id = ticket_interactions.ticketid WHERE userid = $1",
+    [user_id]
+  );
+
+  res.status(StatusCodes.OK).json({ tickets: tickets.rows });
+};
+
+export { userOnTicket, addUserToTicket, getAllUserTicket };

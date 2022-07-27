@@ -105,7 +105,7 @@ const Wrapper = styled.div`
   }
   .btns {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 1rem;
   }
 
@@ -122,21 +122,6 @@ const Wrapper = styled.div`
     transition: var(--transition);
   }
   .edit-btn:hover {
-    transform: scale(1.05);
-  }
-  .delete-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: block;
-    justify-self: center;
-    width: 100%;
-    font-size: 1rem;
-    border: 1px solid grey;
-    padding-bottom: 0.2rem;
-    transition: var(--transition);
-  }
-  .delete-btn:hover {
     transform: scale(1.05);
   }
 

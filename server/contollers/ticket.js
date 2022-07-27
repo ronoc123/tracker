@@ -58,6 +58,15 @@ const deleteTicket = async (req, res) => {
   if (testId.rows[0].createdby != user_id) {
     throw new UnauthenticatedError("You did not create this ticket!");
   }
+
+  // DELETE comments on the ticket
+
+  await db.query("DELETE FROM comment WHERE ticket_id = $1", [id]);
+
+  // DELETE ticket_interactions
+
+  await db.query("DELETE FROM ticket_interactions WHERE ticketid = $1", [id]);
+
   // DELETE TICKET
   await db.query("DELETE FROM ticket WHERE id = $1", [id]);
 
@@ -74,8 +83,6 @@ const getAllTicketOnProject = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ tickets: projectTickets.rows });
 };
-
-const getAllDevsOnTicket = async (req, res) => {};
 
 const getSingleTicket = async (req, res) => {
   const id = req.params.id;

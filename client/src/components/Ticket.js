@@ -16,7 +16,7 @@ const Ticket = ({ title, description, type, severity, status, id }) => {
       <div className="ticket-status-info small">{status}</div>
       <div className="ticket-links">
         <Link to={`/singleticket/${id}`}>Info</Link>
-        <Link to={`/addticket/${id}`}>Edit</Link>
+        <Link to={`/editticket/${id}`}>Edit</Link>
         <BsTrash className="trash-icon" onClick={() => deleteTicket(id)} />
       </div>
     </div>

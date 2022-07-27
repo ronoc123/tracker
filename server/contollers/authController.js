@@ -95,4 +95,19 @@ const updateUser = async (req, res) => {
   res.status(StatusCodes.OK).json({ user: user.rows, token });
 };
 
-export { register, login, updateUser };
+const adminUpdateUser = async (req, res) => {
+  const { user_name, email, user_role, user_id } = req.body;
+
+  if (!user_name || !email || !user_role || !user_id) {
+    throw new BadRequestError("Please provide all values");
+  }
+
+  const newUser = await db.query(
+    "UPDATE user_account SET user_name = $1, email = $2, user_role = $3 WHERE user_id = $4 RETURNING *",
+    [user_name, email, user_role, user_id]
+  );
+
+  res.status(StatusCodes.OK).json({ user: newUser.rows });
+};
+
+export { register, login, updateUser, adminUpdateUser };
