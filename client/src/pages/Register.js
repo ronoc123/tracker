@@ -19,8 +19,14 @@ const Register = () => {
   const [values, setValues] = useState(initialState);
 
   const navigate = useNavigate();
-  const { isLoading, displayAlert, showAlert, setupUser, user } =
-    useAppContext();
+  const {
+    isLoading,
+    displayAlert,
+    showAlert,
+    setupUser,
+    user,
+    testAccountLogin,
+  } = useAppContext();
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -54,6 +60,10 @@ const Register = () => {
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const demoLogin = (role) => {
+    testAccountLogin(role);
   };
 
   useEffect(() => {
@@ -105,6 +115,18 @@ const Register = () => {
             </button>
           </p>
         </form>
+      </div>
+      <div className="demo-container">
+        <button className="demo-btn" onClick={() => demoLogin("developer")}>
+          Demo Developer
+        </button>
+        <button className="demo-btn" onClick={() => demoLogin("manager")}>
+          Demo Project Manager
+        </button>
+        <button className="demo-btn" onClick={() => demoLogin("admin")}>
+          Demo Admin
+        </button>
+        <div className="demo-text">Live Demo Accounts</div>
       </div>
     </Wrapper>
   );

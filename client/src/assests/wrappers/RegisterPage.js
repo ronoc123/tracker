@@ -2,13 +2,45 @@ import styled from "styled-components";
 
 const Wrapper = styled.section`
   display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: center;
   width: 100vw;
   height: 100vh;
   background: var(--clr-primary-5);
+  column-gap: 5rem;
+  .demo-container {
+    display: grid;
+    padding: 2rem;
+    font-size: 2rem;
+    gap: 4rem;
+    border-top: 0.5rem solid var(--clr-primary-1);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-self: left;
+    height: 55vh;
+    width: 25vw;
+    background: var(--clr-white);
+    border-radius: 0.5rem;
+    background: white;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    min-height: 30rem;
+    min-width: 25rem;
+  }
+  .demo-btn {
+    background: var(--clr-primary-5);
+    border: 2px solid var(--clr-primary-1);
+    color: var(--clr-primary-black);
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+  .demo-text {
+    text-align: center;
+    align-self: center;
+  }
   .form-container {
-    /* border: 2px solid red; */
     border-top: 0.5rem solid var(--clr-primary-1);
     display: grid;
     width: 40vw;
@@ -20,11 +52,12 @@ const Wrapper = styled.section`
     border-radius: 0.5rem;
     background: white;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    min-height: 550px;
-    min-width: 400px;
+    min-height: 30rem;
+    min-width: 20rem;
     transition: var(--transition);
     text-align: center;
     padding-top: 2rem;
+    justify-self: right;
   }
 
   .form {
@@ -123,6 +156,43 @@ const Wrapper = styled.section`
     background: #65b876;
     border-radius: 0.5rem;
     color: white;
+  }
+
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    justify-self: center;
+    margin-top: 3rem;
+    background: var(--clr-primary-5);
+    column-gap: 0rem;
+    row-gap: 5rem;
+    .demo-container {
+      justify-self: center;
+      height: 55vh;
+      width: 25vw;
+      background: var(--clr-white);
+      border-radius: 0.5rem;
+      background: white;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+      min-height: 30rem;
+      min-width: 25rem;
+    }
+    .form-container {
+      border-top: 0.5rem solid var(--clr-primary-1);
+      display: grid;
+      width: 40vw;
+      height: 55vh;
+      justify-self: center;
+      max-width: 450px;
+      position: relative;
+      border-radius: 0.5rem;
+      background: white;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+      min-height: 30rem;
+      min-width: 25rem;
+      transition: var(--transition);
+      text-align: center;
+      padding-top: 2rem;
+    }
   }
 `;
 export default Wrapper;

@@ -9,12 +9,10 @@ const Wrapper = styled.nav`
   margin-bottom: 1rem;
   border-top: 1px solid #dfe6ed;
   border-bottom: 1px solid #dfe6ed;
-  /* border: 2px solid red; */
   .center {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    /* border: 2px solid red; */
     padding-left: 2rem;
   }
 
@@ -31,7 +29,7 @@ const Wrapper = styled.nav`
     display: flex;
     justify-content: flex-start;
     font-size: 0.8rem;
-    /* border: 2px solid red; */
+    justify-self: center;
   }
 
   .icon {

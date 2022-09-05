@@ -10,7 +10,7 @@ const ManageRole = () => {
   const {
     // addToProject,
     fetchUsers,
-    // handleChange,
+    handleChange,
     searchDev,
     addUserFilter,
     filtered_project_dev_options,
@@ -58,8 +58,15 @@ const ManageRole = () => {
     updateUserInformation(id, username, user_role, email);
   };
 
-  const handleChange = (e) => {
+  const handleUserChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+  const handleTicketInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name);
+
+    handleChange({ name, value });
   };
 
   useEffect(() => {
@@ -81,20 +88,20 @@ const ManageRole = () => {
               labelText="Username"
               name="username"
               value={values?.username}
-              handleChange={handleChange}
+              handleChange={handleUserChange}
             />
             <FormRow
               type="text"
               labelText="Email"
               name="email"
-              handleChange={handleChange}
+              handleChange={handleUserChange}
               value={values?.email}
             />
             <FormRowSelect
               name="user_role"
               value={values?.user_role}
               labelText="Role"
-              handleChange={handleChange}
+              handleChange={handleUserChange}
               list={["user", "manager", "admin"]}
             />
             <h3>User ID : {values?.id}</h3>
@@ -109,7 +116,7 @@ const ManageRole = () => {
               type="text"
               name="searchDev"
               value={searchDev}
-              handleChange={handleChange}
+              handleChange={handleTicketInput}
               labelText="Search"
             />
             <button className="search-btn" type="submit">

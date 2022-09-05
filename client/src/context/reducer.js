@@ -73,6 +73,9 @@ import {
   EDIT_USER_BEGIN,
   EDIT_USER_SUCCESS,
   EDIT_USER_ERROR,
+  TEST_USER_BEGIN,
+  TEST_USER_SUCCESS,
+  TEST_USER_ERROR,
 } from "../action.js";
 import { initialState } from "./appContext";
 
@@ -111,6 +114,30 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: "fail",
       alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === TEST_USER_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+  if (action.type === TEST_USER_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      token: action.payload.token,
+      user: action.payload.user,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Logging in User...",
+    };
+  }
+  if (action.type === TEST_USER_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "fail",
+      alertText: "Invalid Account",
     };
   }
 

@@ -79,6 +79,9 @@ import {
   EDIT_USER_BEGIN,
   EDIT_USER_SUCCESS,
   EDIT_USER_ERROR,
+  TEST_USER_BEGIN,
+  TEST_USER_SUCCESS,
+  TEST_USER_ERROR,
 } from "../action.js";
 
 const token = localStorage.getItem("token");
@@ -592,6 +595,53 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const testAccountLogin = async (role) => {
+    dispatch({ type: TEST_USER_BEGIN });
+
+    try {
+      if (role === "admin") {
+        const response = await axios.post(`/api/v1/auth/login`, {
+          email: "TestAdmin@test.com",
+          user_password: "123456",
+        });
+        const { user, token } = response.data;
+        dispatch({
+          type: TEST_USER_SUCCESS,
+          payload: { user, token },
+        });
+        addUserToLocalStorage({ user, token });
+      } else if (role === "manager") {
+        const response = await axios.post(`/api/v1/auth/login`, {
+          email: "TestManager@test.com",
+          user_password: "123456",
+        });
+        const { user, token } = response.data;
+        dispatch({
+          type: TEST_USER_SUCCESS,
+          payload: { user, token },
+        });
+        addUserToLocalStorage({ user, token });
+      } else if (role === "developer") {
+        const response = await axios.post(`/api/v1/auth/login`, {
+          email: "TestDeveloper@test.com",
+          user_password: "123456",
+        });
+        const { user, token } = response.data;
+        dispatch({
+          type: TEST_USER_SUCCESS,
+          payload: { user, token },
+        });
+        addUserToLocalStorage({ user, token });
+      }
+    } catch (error) {
+      dispatch({
+        type: TEST_USER_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -628,6 +678,7 @@ const AppProvider = ({ children }) => {
         editProjectInfo,
         editTicketInfo,
         updateUserInformation,
+        testAccountLogin,
       }}
     >
       {children}

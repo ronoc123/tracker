@@ -39,6 +39,7 @@ Global Styles
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: "Nuosu SIL", serif;
   background: var(--clr-white);
@@ -47,9 +48,6 @@ body {
   font-size: 0.875rem;
   background: var(--clr-primary-5);
 }
-/* ::-webkit-scrollbar {
-  background: none;
-} */
 
 ul {
   list-style-type: none;
@@ -77,4 +75,26 @@ a {
 .full-page {
   min-height: calc(100vh - 8rem);
   background: var(--clr-primary-5);
+}
+
+::-webkit-scrollbar {
+  width: 0.5vw;
+  transition: var(--transition);
+}
+::-webkit-scrollbar:hover {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7f8280;
+  border-radius: 3rem;
+  transition: var(--transition);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
+  border-radius: 3rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: lightgrey;
 }
