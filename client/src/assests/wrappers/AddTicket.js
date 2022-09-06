@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     box-shadow: var(--dark-shadow);
     border-radius: var(--radius);
     min-width: 20rem;
-    min-height: 25rem;
+    min-height: 30rem;
     padding-bottom: 1rem;
   }
   .input-container {
@@ -45,6 +45,9 @@ const Wrapper = styled.div`
     height: 1.5rem;
     font-size: 1.1rem;
     padding-left: 0.2rem;
+  }
+  .description {
+    height: 3.5rem;
   }
   .form-select {
     height: 1.5rem;
