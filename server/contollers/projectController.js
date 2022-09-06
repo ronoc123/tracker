@@ -7,6 +7,10 @@ const createProject = async (req, res) => {
   const { title, description } = req.body;
   const { id: user_id } = req.user.user;
 
+  if (description.length >= 150) {
+    throw new BadRequestError("Description is too Long.");
+  }
+
   const newProject = await db.query(
     "INSERT INTO project(title, description, createdby) VALUES($1, $2, $3) RETURNING *",
     [title, description, user_id]

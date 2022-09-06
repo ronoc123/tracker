@@ -3,16 +3,20 @@ import { Link } from "react-router-dom";
 
 const HomeProject = ({ title, description, user_name, id }) => {
   return (
-    <Link to={`/project/${id}`} className="project">
-      <h1 className="project-title">{title}</h1>
-      <div className="project-icon">
-        <FaWindowRestore />
+    <div className="project">
+      <div className="project-title">{title}</div>
+      <div className="top-container"></div>
+      <div className="bottom-container">
+        <div></div>
+        <div></div>
+        <Link to={`/project/${id}`} className="project-link">
+          View
+        </Link>
+        <Link to={`/project`} className="project-link-all">
+          More
+        </Link>
       </div>
-      <p className="project-description">
-        <span className="span-title">Description:</span> {description}
-      </p>
-      <div className="project-creator">Created By: {user_name}</div>
-    </Link>
+    </div>
   );
 };
 

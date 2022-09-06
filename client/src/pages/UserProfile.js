@@ -55,9 +55,6 @@ const UserProfile = () => {
           <button type="submit" className="btn submit-btn" disabled={isLoading}>
             Save Changes
           </button>
-          <Link to="/home" className="password-btn">
-            Reset Password
-          </Link>
         </div>
       </form>
     </Wrapper>

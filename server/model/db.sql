@@ -10,7 +10,7 @@ CREATE TABLE user_account (
 CREATE TABLE project (
     id BIGSERIAL PRIMARY KEY,
     title VARCHAR(50) NOT NULL UNIQUE,
-    description VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
     createdby INT NOT NULL,
     FOREIGN KEY (createdby) REFERENCES user_account (user_id)
 );

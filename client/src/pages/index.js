@@ -15,6 +15,7 @@ import AddDevToTicket from "./AddDevToTicket";
 import SingleTicketPage from "./SingleTicketPage";
 import EditProject from "./EditProject";
 import EditTicket from "./EditTicket";
+import AboutPage from "./AboutPage";
 
 export {
   ManageProject,
@@ -34,4 +35,5 @@ export {
   SingleTicketPage,
   EditProject,
   EditTicket,
+  AboutPage,
 };

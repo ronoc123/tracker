@@ -76,6 +76,8 @@ import {
   TEST_USER_BEGIN,
   TEST_USER_SUCCESS,
   TEST_USER_ERROR,
+  CLOSE_SIDEBAR,
+  OPEN_SIDEBAR,
 } from "../action.js";
 import { initialState } from "./appContext";
 
@@ -185,7 +187,7 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       showAlert: true,
-      alert: action.payload.msg,
+      alertText: action.payload,
     };
   }
 
@@ -652,6 +654,20 @@ const reducer = (state, action) => {
       isLoading: false,
       adminEdit: action.payload,
       alertText: "User Updated",
+    };
+  }
+
+  if (action.type === CLOSE_SIDEBAR) {
+    return {
+      ...state,
+      isSidebarOpen: false,
+    };
+  }
+
+  if (action.type === OPEN_SIDEBAR) {
+    return {
+      ...state,
+      isSidebarOpen: true,
     };
   }
 

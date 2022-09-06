@@ -47,13 +47,11 @@ const Wrapper = styled.nav`
   }
 
   .link:hover {
-    /* background: var(--clr-primary-1); */
     background: #87888a;
     .icon {
       color: var(--clr-primary-3);
     }
     .text {
-      /* color: var(--clr-primary-3); */
       color: white;
     }
   }
@@ -61,38 +59,46 @@ const Wrapper = styled.nav`
     color: #545d63;
   }
 
+  .about {
+    justify-self: right;
+    padding-right: 2rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+
   .user-info {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 2rem;
-    color: white;
-  }
-
-  .item-1 {
-    align-items: center;
     display: grid;
-    grid-template-columns: auto auto;
-    gap: 0.5rem;
-    text-transform: capitalize;
-    transition: var(--transition);
-  }
-
-  .item-2 {
-    display: grid;
-    position: relative;
-    color: #545d63;
-  }
-  .profile-link {
-    color: #545d63;
-    font-size: 1.2rem;
-    align-self: start;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
   }
   .item-1:hover {
     transform: scale(1.05);
     cursor: pointer;
   }
+  .icon-1 {
+  }
 
+  .profile-link {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    color: #545d63;
+    font-size: 1.2rem;
+  }
+
+  .name {
+    color: black;
+    font-size: 1.3rem;
+    padding-left: 0.5rem;
+  }
+  .icon-1 {
+    font-size: 2rem;
+    justify-self: right;
+    color: var(--clr-primary-1);
+  }
+
+  .item {
+    padding-left: 2rem;
+  }
   .notification {
     position: absolute;
     top: -0.5rem;
@@ -102,14 +108,6 @@ const Wrapper = styled.nav`
     color: #545d63;
   }
 
-  .item {
-    padding-left: 2rem;
-  }
-  .icon-1 {
-    font-size: 2rem;
-    color: var(--clr-primary-1);
-  }
-
   .logout-btn {
     width: 5.5rem;
     cursor: pointer;
@@ -117,9 +115,10 @@ const Wrapper = styled.nav`
     font-size: 1.2rem;
     background: var(--clr-primary-1);
     color: white;
-
+    justify-self: right;
+    margin-right: 1rem;
     padding-bottom: 0.8rem;
-    margin-bottom: 0.5rem;
+    /* margin-top: 0.5rem; */
   }
 
   .logout-btn:hover {

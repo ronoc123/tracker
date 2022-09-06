@@ -59,6 +59,9 @@ const Wrapper = styled.div`
   .create-btn:hover {
     transform: scale(1.05);
   }
+  .alert {
+    text-align: center;
+  }
 `;
 
 export default Wrapper;

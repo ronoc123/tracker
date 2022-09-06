@@ -92,7 +92,7 @@ const Wrapper = styled.div`
     align-items: center;
   }
   .dev-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
   .single-user-container {
     padding: 1rem;
@@ -120,9 +120,6 @@ const Wrapper = styled.div`
     border: 1px solid grey;
     padding-bottom: 0.2rem;
     transition: var(--transition);
-  }
-  .edit-btn:hover {
-    transform: scale(1.05);
   }
 
   @media screen and (max-width: 1400px) {

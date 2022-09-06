@@ -18,6 +18,7 @@ import {
   SingleTicketPage,
   EditProject,
   EditTicket,
+  AboutPage,
 } from "./pages/index";
 
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
             <Route path="singleticket/:id" element={<SingleTicketPage />} />
             <Route path="editproject/:id" element={<EditProject />} />
             <Route path="editticket/:id" element={<EditTicket />} />
+            <Route path="/about" element={<AboutPage />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>

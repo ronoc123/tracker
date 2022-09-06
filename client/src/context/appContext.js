@@ -82,6 +82,8 @@ import {
   TEST_USER_BEGIN,
   TEST_USER_SUCCESS,
   TEST_USER_ERROR,
+  CLOSE_SIDEBAR,
+  OPEN_SIDEBAR,
 } from "../action.js";
 
 const token = localStorage.getItem("token");
@@ -165,6 +167,7 @@ const initialState = {
   adminEdit: [],
   editProjectTitle: "",
   editProjectDescription: "",
+  isSidebarOpen: false,
 };
 
 const AppContext = React.createContext();
@@ -264,10 +267,12 @@ const AppProvider = ({ children }) => {
       dispatch({ type: CLEAR_VALUES });
       clearAlert();
     } catch (error) {
+      console.log(error);
       dispatch({
         type: CREATE_PROJECT_ERROR,
         payload: error.response.data.msg,
       });
+      clearAlert();
     }
   };
 
@@ -370,7 +375,8 @@ const AppProvider = ({ children }) => {
 
   const getMyTickets = async () => {
     dispatch({ type: GET_MY_TICKET_BEGIN });
-    let url = `/ticketusers/userticket/${user[0].user_id}`;
+    const user_id = state.user[0].user_id;
+    let url = `/ticketusers/userticket/${user_id}`;
     try {
       const { data } = await authFetch(url);
       dispatch({ type: GET_MY_TICKET_SUCCESS, payload: data.tickets });
@@ -642,6 +648,14 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const closeSidebar = () => {
+    dispatch({ type: CLOSE_SIDEBAR });
+  };
+
+  const openSidebar = () => {
+    dispatch({ type: OPEN_SIDEBAR });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -679,6 +693,8 @@ const AppProvider = ({ children }) => {
         editTicketInfo,
         updateUserInformation,
         testAccountLogin,
+        closeSidebar,
+        openSidebar,
       }}
     >
       {children}
